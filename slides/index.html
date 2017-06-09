@@ -7,7 +7,7 @@
 		<title>Kotlin: A language for productive developers</title>
 
 		<link rel="stylesheet" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/black.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
@@ -37,11 +37,29 @@
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
 				dependencies: [
+					{ src: 'node_modules/reveal.js-menu/menu.js' },
 					{ src: 'reveal.js/plugin/markdown/marked.js' },
 					{ src: 'reveal.js/plugin/markdown/markdown.js' },
 					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
 					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
+				],
+				menu: {
+					// Specifies the themes that will be available in the themes
+					// menu panel. Set to 'false' to hide themes panel.
+					themes: [
+						{ name: 'Beige', theme: 'reveal.js/css/theme/beige.css' },
+						{ name: 'Black', theme: 'reveal.js/css/theme/black.css' },
+						{ name: 'Blood', theme: 'reveal.js/css/theme/blood.css' },
+						{ name: 'League', theme: 'reveal.js/css/theme/league.css' },
+						{ name: 'Moon', theme: 'reveal.js/css/theme/moon.css' },
+						{ name: 'Night', theme: 'reveal.js/css/theme/night.css' },
+						{ name: 'Serif', theme: 'reveal.js/css/theme/serif.css' },
+						{ name: 'Simple', theme: 'reveal.js/css/theme/simple.css' },
+						{ name: 'Sky', theme: 'reveal.js/css/theme/sky.css' },
+						{ name: 'Solarized', theme: 'reveal.js/css/theme/solarized.css' },
+						{ name: 'White', theme: 'reveal.js/css/theme/white.css' }
+					]
+				}
 			});
 		</script>
 	</body>

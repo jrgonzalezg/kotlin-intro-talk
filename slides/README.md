@@ -1,6 +1,10 @@
-### Kotlin: A language for productive developers
+<!-- .slide: style="text-align: left;" -->
 
-Olmo Gallegos & Juan Ramón González González
+### Kotlin: A language for productive developers <!-- .element: style="text-align: center;" -->
+
+Olmo Gallegos ([@voghDev](https://twitter.com/voghDev))
+
+Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg))
 
 ---
 
@@ -319,7 +323,7 @@ sealed class BookResult {
 
 ## Algebraic Data Types (ADTs) - Example
 
-- Based on https://fsharpforfunandprofit.com/ddd/
+- Based on [https://fsharpforfunandprofit.com/ddd/](https://fsharpforfunandprofit.com/ddd/)
 
 ```kotlin
 typealias ContactName = String
@@ -350,7 +354,7 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 
 ## Domain Specific Languages (DSLs)
 
-- Life is Great and Everything Will Be Ok, Kotlin is Here (Google I/O '17 - https://www.youtube.com/watch?v=fPzxfeDJDzY)
+- Life is Great and Everything Will Be Ok, Kotlin is Here (Google I/O '17 - [https://www.youtube.com/watch?v=fPzxfeDJDzY](https://www.youtube.com/watch?v=fPzxfeDJDzY))
 
 ```kotlin
 val db: SQLiteDatabase = // ...
@@ -389,7 +393,7 @@ inline fun SQLiteDatabase.transaction(body: SQLiteDatabase.() -> Unit) {
 
 ## Coroutines
 
-https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md
+[https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md)
 
 ```kotlin
 suspend fun doSomethingUsefulOne(): Int {
@@ -430,15 +434,15 @@ Completed in 1017 ms
 
 - References
   - Documentation - Kotlin Programming Language
-    - https://kotlinlang.org/docs/
+    - [https://kotlinlang.org/docs/](https://kotlinlang.org/docs/)
   - Kotlin and Android | Android Developers
-  - https://developer.android.com/kotlin/index.html
+  - [https://developer.android.com/kotlin/index.html](https://developer.android.com/kotlin/index.html)
   - Books
     - Kotlin for Android Developers - Antonio Leiva
-      - https://leanpub.com/kotlin-for-android-developers/
+      - [https://leanpub.com/kotlin-for-android-developers/](https://leanpub.com/kotlin-for-android-developers/)
     - Kotlin in Action - Dmitry Jemerov and Svetlana Isakova
-      - https://www.manning.com/books/kotlin-in-action
-  - Lambda World - October 26th & 27th, 2017: http://www.lambda.world/
+      - [https://www.manning.com/books/kotlin-in-action](https://www.manning.com/books/kotlin-in-action)
+  - Lambda World - October 26th & 27th, 2017: [http://www.lambda.world/](http://www.lambda.world/)
     - Hadi Hariri - VP of Developer Advocacy, JetBrains - Kotlin talk
 
 ---
@@ -451,12 +455,22 @@ Completed in 1017 ms
   - Repository Pattern
   - Many tests (reword this)
   - Single God Package, Thermosiphon Samples
-  - https://github.com/voghDev/HelloKotlin
+  - [https://github.com/voghDev/HelloKotlin](https://github.com/voghDev/HelloKotlin)
 - OpenLibraryApp
   - Sample Android App to query and display Open Library data
   - Dependency Injection (DI) with Dagger 2
   - Clean Architecture, Repository Pattern, MVP
   - Domain-driven design, Package by feature
   - Functional Programming (FP), Coroutines
-  - https://github.com/jrgonzalezg/OpenLibraryApp
+  - [https://github.com/jrgonzalezg/OpenLibraryApp](https://github.com/jrgonzalezg/OpenLibraryApp)
+
+---
+
+<!-- .slide: style="text-align: left;" -->
+
+### Thanks! <!-- .element: style="text-align: center;" -->
+
+Olmo Gallegos ([@voghDev](https://twitter.com/voghDev))
+
+Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg))
 

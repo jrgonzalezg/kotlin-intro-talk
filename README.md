@@ -2,7 +2,7 @@
 
 This presentation shows how the features in the Kotlin language can be used to make you a more productive developer.
 
-To run the presentation from a local web server at http://localhost:8000/ do:
+To run the presentation from a local web server at [http://localhost:8000/](http://localhost:8000/) do:
 
 ```bash
 git clone --recursive git@github.com:jrgonzalezg/kotlin-intro-talk.git

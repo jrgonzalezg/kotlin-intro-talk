@@ -2,6 +2,8 @@
 
 This presentation shows how the features in the Kotlin language can be used to make you a more productive developer.
 
+It has been created using [reveal.js](https://github.com/hakimel/reveal.js) with [Markdown content](slides/README.md).
+
 To run the presentation from a local web server at [http://localhost:8000/](http://localhost:8000/) do:
 
 ```bash

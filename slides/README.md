@@ -14,7 +14,7 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
   - Basics
   - Null-safety
   - Extension functions
-  - Kotlin on Android? (small block about anko and other concrete details on Android Dev.)
+  - Kotlin on Android
 - Functional Programming (FP) basics
   - Lambda expressions
   - FP operators available in Kotlin?
@@ -25,6 +25,8 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
   - Small intro to HKT and its adaptation to Kotlin?
 - To know more
 
+Note: Consider talking about anko and other concrete details on Android Dev
+
 ---
 
 ## The Kotlin programming language
@@ -34,6 +36,7 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
 - Functional (we’ll focus on that later)
 - Created by JetBrains
 - Official ! First class support in Android since Google I/O 2017
+- Official support in Spring Framework 5.0 too (final version ~ July 2017))
 - Made by and for Java “sufferers”
 
 ---

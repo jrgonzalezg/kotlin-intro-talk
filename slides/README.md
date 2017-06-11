@@ -125,45 +125,83 @@ Book book = null;
 book.getTitle();
 ```
 
-Kotlin - not using optionals
+This code causes NPE!
+
+---
+
+## Null-Safety
+
+Kotlin - trying to use null without using optionals
 
 ```kotlin
 val book: Book = null
 print(book.title)
 ```
 
-Kotlin - using optionals
+This code does not compile - "null can not be a value of a non-null type Book"
+
+<img src="img/null1.png" />
+
+---
+
+## Null-Safety - Using optionals
+
 
 ```kotlin
 val book: Book? = null
 print(book.title)
 ```
 
-Optionals usage
+This code does not compile - "only safe (?.) or non-null asserted (!!) calls are allowed on a nullable receiver of type Book"
+
+<img src="img/null2.png" />
+
+One way to make this work would be using the ? operator
+
+---
+
+## Null-Safety - Using optionals
 
 ```kotlin
 val book: Book? = null
 print(book?.title)
 ```
+This code works, prints nothing. "title" is never evaluated because "book" is null. NPE is avoided
+
+---
+
+## Null-Safety - Using optionals
+
+Asserting non-null on optionals
 
 ```kotlin
 val book: Book? = null
 print(book!!.title)
 ```
 
+This causes NPE, as we are forcing "book.title" to be evaluated, but "book" is null. Would behave similar to Java
+
 ---
 
 ## Inheritance
 
-Given the previous example, we can't inherit from Book
+Given the previous data class "Book"
 
 ```kotlin
 data class Book(val id: Int, val title: String, val coverId: Int)
 ```
 
+We want to create a subclass called "Novel"
+
 ```kotlin
-class Novel : Book(id = 0, title = "", coverId = 0)
+class Novel : Book(id = 0, title = "", coverId = 0) {
+    var summary : String = ""
+}
 ```
+
+We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
+
+<img src="img/inheritance1.png" />
 
 Book needs to be declared as open class for inheritance to work
 

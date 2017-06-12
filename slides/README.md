@@ -328,6 +328,89 @@ if (novel is Novel) {
 
 ---
 
+## with, let, apply
+
+Java
+
+```java
+final TextView textView = new TextView(this);
+textView.setText("Hello!");
+textView.setTextSize(16f);
+textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+```
+Kotlin
+
+```kotlin
+val textView : TextView = TextView(this)
+with(textView) {
+    text = ""
+    textSize = 16f
+    setTextColor(color(android.R.color.white))
+}
+```
+
+Optional receiver can't be used in this case
+
+---
+
+## with, let, apply
+
+Java
+
+```java
+LinearLayout linearLayout = new LinearLayout(this);
+if (textView != null) {
+    linearLayout.addView(textView);
+    setContentView(linearLayout);
+}
+```
+Kotlin
+
+```kotlin
+val linearLayout = LinearLayout(this)
+textView?.let {
+    linearLayout.addView(it)
+    setContentView(linearLayout)
+}
+```
+
+let won't be applied if textView is null
+
+---
+
+## with, let, apply
+
+Java
+
+```java
+TextView textView = new TextView(this);
+textView.setText("Hello!");
+textView.setTextSize(16f);
+textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+```
+Kotlin
+
+```kotlin
+val textView: TextView = TextView(this).apply {
+    text = "Hello!"
+    textSize = 16f
+    setTextColor(color(android.R.color.white))
+}
+```
+
+textView can also be optional and this code will still work
+
+---
+
+### Algebraic Data Types (ADTs) - Product Types
+
+<aside class="notes">
+		[Juanra speaks]
+		this slide is just to let the crowd know that we are switching to a new section
+</aside>
+
+---
+
 ## Algebraic Data Types (ADTs) - Product Types
 
 - Seen in the wild as: Tuples, Records, POJOs…

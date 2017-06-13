@@ -1,0 +1,7 @@
+/**
+ * reveal.js custom theme tweaks for the slides
+ */
+
+.reveal pre code {
+  max-height: 800px;
+}

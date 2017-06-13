@@ -126,7 +126,8 @@ module.exports = function(grunt) {
 					'reveal.js/css/theme/source/*.sass',
 					'reveal.js/css/theme/source/*.scss',
 					'reveal.js/css/theme/template/*.sass',
-					'reveal.js/css/theme/template/*.scss'
+					'reveal.js/css/theme/template/*.scss',
+					'css/theme/custom.css'
 				],
 				tasks: 'css-themes'
 			},

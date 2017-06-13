@@ -22,7 +22,7 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
   - Algebraic Data Types (ADTs)
   - Domain Specific Languages (DSLs)
   - Coroutines
-  - Small intro to HKT and its adaptation to Kotlin?
+  - Advanced Types
 - To know more
 
 Note: Consider talking about anko and other concrete details on Android Dev
@@ -551,6 +551,80 @@ It produces something like this:
 The answer is 42
 
 Completed in 1017 ms
+
+---
+
+## Advanced Types
+
+%%%
+
+## Variance
+
+- Definition: `A <: B` if `A` is a subtype of `B`
+
+- What if we have generics (*type constructors*) like `List`?
+
+  - Covariant: `interface List<out A>`
+    - If `A <: B` then `List<A> <: List<B>`
+
+  - Contravariant: `interface List<in A>`
+    - If `A <: B` then `List<A> >: List<B>`
+
+  - Invariant: `interface List<A>`
+    - Neither `List<A>` nor `List<B>` are a subtype of the other
+
+%%%
+
+## Variance
+
+```kotlin
+interface List<out A> {
+  fun get(index: Int): A // Safe
+  fun add(a: A): Boolean // Unsafe
+}
+```
+
+```kotlin
+var cats: List<Cat> = listOf(cat1, cat2, cat3)
+var animals: List<Animal> = cats
+
+val animal = animals.get(0) // Ok!
+animals.add(dog1) // Problem - Adding a dog to a list of cats!
+```
+
+- List in Kotlin is covariant - Why?
+  - It is read-only so A never appears in a contravariant position
+  <!-- .element: class="fragment" data-fragment-index="1"-->
+  - MutableList is invariant
+  <!-- .element: class="fragment" data-fragment-index="2"-->
+  - You can control variance and the compiler enforces it
+  <!-- .element: class="fragment" data-fragment-index="3"-->
+  - Use @UnsafeVariance annotation if you know something is safe despite it appears in an unsafe position
+  <!-- .element: class="fragment" data-fragment-index="3"-->
+
+%%%
+
+## Higher-Kinded Types (HKTs)
+
+- Generics only allow to abstract over the enclosed type
+
+- What if we also want to abstract over the type constructor itself?
+
+- It is allowed on languages like Haskell or Scala (F[_])
+
+- Kotlin does not support this directly
+
+- **Katz\!** <!-- .element: class="fragment" data-fragment-index="1"-->
+
+%%%
+
+## Katz: Functional Data Types and abstractions for Kotlin
+  - Custom encoding to allow defining HKTs and type classes
+  - Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)
+  - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
+  - With Free monads!
+    - Totally separate program definition from program interpretation
+  - [https://github.com/FineCinnamon/Katz](https://github.com/FineCinnamon/Katz)
 
 ---
 

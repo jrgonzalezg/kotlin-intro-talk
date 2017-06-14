@@ -19,10 +19,9 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
   - Lambda expressions
   - FP operators available in Kotlin?
 - Advanced topics
-  - Algebraic Data Types (ADTs)
+  - Advanced Types
   - Domain Specific Languages (DSLs)
   - Coroutines
-  - Advanced Types
 - To know more
 
 Note: Consider talking about anko and other concrete details on Android Dev
@@ -404,16 +403,99 @@ textView can also be optional and this code will still work
 
 ---
 
+## Advanced Types
+
+Note: [Juanra speaks] This slide is just to let the crowd know that we are switching to a new section
+
+%%%
+
+### Type Hierarchy
+
+- Any
+  - Any? is the root of the hierarchy (a supertype of any other type)
+  - Any is a subtype of Any? and the root of the Non-Null types
+
+- Unit
+  - A type with only one value: the Unit object
+  - Corresponds to the void type in Java
+
+%%%
+
+### Type Hierarchy
+
+- Nothing
+  - Nothing has no instances
+  - Represents *a value that never exists*
+  - Example: Functions that never return (always throw an exception)
+  - Bottom type: It is a subtype of any other type
+
+```kotlin
+public inline fun TODO(reason: String): Nothing =
+  throw NotImplementedError("An operation is not implemented: $reason")
+
+fun doSomething: A = TODO("This should do something!") // Valid implementation
+```
+
+%%%
+
+### Type Hierarchy
+
+- Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy
+  - Good additional explanation of Kotlin Types
+  - Relation between Nullable and Non-Null Types
+
+  ![nullable-hierarchy](img/nullable-hierarchy.png)
+  - [http://natpryce.com/articles/000818.html](http://natpryce.com/articles/000818.html)
+
+%%%
+
+### Variance
+
+- Definition: `A <: B` if `A` is a subtype of `B`
+
+- What if we have generics (*type constructors*) like `List`?
+
+  - Covariant: `interface List<out A>`
+    - If `A <: B` then `List<A> <: List<B>`
+
+  - Contravariant: `interface List<in A>`
+    - If `A <: B` then `List<A> >: List<B>`
+
+  - Invariant: `interface List<A>`
+    - Neither `List<A>` nor `List<B>` are a subtype of the other
+
+%%%
+
+### Variance
+
+```kotlin
+interface List<out A> {
+  fun get(index: Int): A // Safe
+  fun add(a: A): Boolean // Unsafe
+}
+```
+
+```kotlin
+var cats: List<Cat> = listOf(cat1, cat2, cat3)
+var animals: List<Animal> = cats
+
+val animal = animals.get(0) // Ok!
+animals.add(dog1) // Problem - Adding a dog to a list of cats!
+```
+
+- List in Kotlin is covariant - Why?
+  - It is read-only so A never appears in a contravariant position
+  <!-- .element: class="fragment" data-fragment-index="1" -->
+  - MutableList is invariant
+  <!-- .element: class="fragment" data-fragment-index="2" -->
+  - You can control variance and the compiler enforces it
+  <!-- .element: class="fragment" data-fragment-index="3" -->
+  - Use @UnsafeVariance annotation if you know something is safe despite it appears in an unsafe position
+  <!-- .element: class="fragment" data-fragment-index="3" -->
+
+%%%
+
 ### Algebraic Data Types (ADTs) - Product Types
-
-<aside class="notes">
-		[Juanra speaks]
-		this slide is just to let the crowd know that we are switching to a new section
-</aside>
-
----
-
-## Algebraic Data Types (ADTs) - Product Types
 
 - Seen in the wild as: Tuples, Records, POJOs…
 - Directly supported in most languages
@@ -426,9 +508,9 @@ data class Book(val id: Int, val title: String, val coverId: Int)
 - Always contains an id, a title and a coverId
 - There are as many possible inhabitants of the type as the product of the number of values in each of the composing subtypes
 
----
+%%%
 
-## Algebraic Data Types (ADTs) - Sum Types
+### Algebraic Data Types (ADTs) - Sum Types
 
 - Also named: Coproducts, Tagged Types, Disjoint Unions or Variant Types
 - No direct support on many languages
@@ -445,9 +527,9 @@ sealed class BookResult {
 - It can contain only one of the enclosed types and nothing else
 - As many possible inhabitants as the sum of inhabitants on each subtype
 
----
+%%%
 
-## Algebraic Data Types (ADTs) - Example
+### Algebraic Data Types (ADTs) - Example
 
 - Based on [https://fsharpforfunandprofit.com/ddd/](https://fsharpforfunandprofit.com/ddd/)
 
@@ -475,6 +557,30 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 - It is not possible to create a contact with no primary contact info (or null)
 - when branches are autocompleted, include smarcasts and the compiler ensures you handle all ContactInfo options => Less tests
 - TODO() => Runtime Exception, add to static code analysis (detekt in Kotlin, checkstyle, findbugs)
+
+%%%
+
+### Higher-Kinded Types (HKTs)
+
+- Generics only allow to abstract over the enclosed type
+
+- What if we also want to abstract over the type constructor itself?
+
+- It is allowed on languages like Haskell or Scala (F[\_])
+
+- Kotlin does not support this directly
+
+- **Katz\!** <!-- .element: class="fragment" -->
+
+%%%
+
+### Katz: Functional Data Types and abstractions
+  - Custom encoding to allow defining HKTs and type classes
+  - Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)
+  - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
+  - With Free monads!
+    - Totally separate program definition from program interpretation
+  - [https://github.com/FineCinnamon/Katz](https://github.com/FineCinnamon/Katz)
 
 ---
 
@@ -553,120 +659,6 @@ It produces something like this:
 The answer is 42
 
 Completed in 1017 ms
-
----
-
-## Advanced Types
-
-%%%
-
-## Kotlin Type Hierarchy
-
-- Any
-  - Any? is the root of the hierarchy (a supertype of any other type)
-  - Any is a subtype of Any? and the root of the Non-Null types
-
-- Unit
-  - A type with only one value: the Unit object
-  - Corresponds to the void type in Java
-
-%%%
-
-## Kotlin Type Hierarchy
-
-- Nothing
-  - Nothing has no instances
-  - Represents *a value that never exists*
-  - Example: Functions that never return (always throw an exception)
-  - Bottom type: It is a subtype of any other type
-
-```kotlin
-public inline fun TODO(reason: String): Nothing =
-  throw NotImplementedError("An operation is not implemented: $reason")
-
-fun doSomething: A = TODO("This should do something!") // Valid implementation
-```
-
-%%%
-
-## Kotlin Type Hierarchy
-
-- Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy
-  - Good additional explanation of Kotlin Types
-  - Relation between Nullable and Non-Null Types
-
-  ![nullable-hierarchy](img/nullable-hierarchy.png)
-  - [http://natpryce.com/articles/000818.html](http://natpryce.com/articles/000818.html)
-
-%%%
-
-## Variance
-
-- Definition: `A <: B` if `A` is a subtype of `B`
-
-- What if we have generics (*type constructors*) like `List`?
-
-  - Covariant: `interface List<out A>`
-    - If `A <: B` then `List<A> <: List<B>`
-
-  - Contravariant: `interface List<in A>`
-    - If `A <: B` then `List<A> >: List<B>`
-
-  - Invariant: `interface List<A>`
-    - Neither `List<A>` nor `List<B>` are a subtype of the other
-
-%%%
-
-## Variance
-
-```kotlin
-interface List<out A> {
-  fun get(index: Int): A // Safe
-  fun add(a: A): Boolean // Unsafe
-}
-```
-
-```kotlin
-var cats: List<Cat> = listOf(cat1, cat2, cat3)
-var animals: List<Animal> = cats
-
-val animal = animals.get(0) // Ok!
-animals.add(dog1) // Problem - Adding a dog to a list of cats!
-```
-
-- List in Kotlin is covariant - Why?
-  - It is read-only so A never appears in a contravariant position
-  <!-- .element: class="fragment" data-fragment-index="1" -->
-  - MutableList is invariant
-  <!-- .element: class="fragment" data-fragment-index="2" -->
-  - You can control variance and the compiler enforces it
-  <!-- .element: class="fragment" data-fragment-index="3" -->
-  - Use @UnsafeVariance annotation if you know something is safe despite it appears in an unsafe position
-  <!-- .element: class="fragment" data-fragment-index="3" -->
-
-%%%
-
-## Higher-Kinded Types (HKTs)
-
-- Generics only allow to abstract over the enclosed type
-
-- What if we also want to abstract over the type constructor itself?
-
-- It is allowed on languages like Haskell or Scala (F[\_])
-
-- Kotlin does not support this directly
-
-- **Katz\!** <!-- .element: class="fragment" -->
-
-%%%
-
-## Katz: Functional Data Types and abstractions for Kotlin
-  - Custom encoding to allow defining HKTs and type classes
-  - Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)
-  - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
-  - With Free monads!
-    - Totally separate program definition from program interpretation
-  - [https://github.com/FineCinnamon/Katz](https://github.com/FineCinnamon/Katz)
 
 ---
 

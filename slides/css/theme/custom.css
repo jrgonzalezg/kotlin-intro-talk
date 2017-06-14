@@ -5,3 +5,8 @@
 .reveal pre code {
   max-height: 800px;
 }
+
+.reveal strong,
+.reveal b {
+  color: #f17e00;
+}

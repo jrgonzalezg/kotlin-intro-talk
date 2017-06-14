@@ -72,6 +72,8 @@ Note: Consider talking about anko and other concrete details on Android Dev
 
 ---
 
+<!-- .slide: style="text-align: left;" -->
+
 ## Data classes
 
 - Java
@@ -107,6 +109,7 @@ public class Book {
   }
 }
 ```
+<!-- .element: style="font-size: 30%" -->
 
 - Kotlin
 
@@ -118,7 +121,7 @@ data class Book(val id: Int, val title: String, val coverId: Int)
 
 ## Null-Safety
 
-Java (no optionals - available in Java 8)
+Java (all non-primitive types are nullable in an unsafe way)
 
 ```java
 Book book = null;
@@ -131,7 +134,7 @@ This code causes NPE!
 
 ## Null-Safety
 
-Kotlin - trying to use null without using optionals
+Kotlin - Trying to use null in Non-Null types
 
 ```kotlin
 val book: Book = null
@@ -140,12 +143,11 @@ print(book.title)
 
 This code does not compile - "null can not be a value of a non-null type Book"
 
-<img src="img/null1.png" />
+![null1](img/null1.png)
 
 ---
 
-## Null-Safety - Using optionals
-
+## Null-Safety - Nullable types
 
 ```kotlin
 val book: Book? = null
@@ -154,13 +156,13 @@ print(book.title)
 
 This code does not compile - "only safe (?.) or non-null asserted (!!) calls are allowed on a nullable receiver of type Book"
 
-<img src="img/null2.png" />
+![null2](img/null2.png)
 
 One way to make this work would be using the ? operator
 
 ---
 
-## Null-Safety - Using optionals
+## Null-Safety - Nullable types
 
 ```kotlin
 val book: Book? = null
@@ -170,9 +172,9 @@ This code works, prints nothing. "title" is never evaluated because "book" is nu
 
 ---
 
-## Null-Safety - Using optionals
+## Null-Safety - Nullable types
 
-Asserting non-null on optionals
+You can also assert non-null using the \!\! operator
 
 ```kotlin
 val book: Book? = null
@@ -201,7 +203,7 @@ class Novel : Book(id = 0, title = "", coverId = 0) {
 
 We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
 
-<img src="img/inheritance1.png" />
+![inheritance1](img/inheritance1.png)
 
 Book needs to be declared as open class for inheritance to work
 
@@ -558,6 +560,46 @@ Completed in 1017 ms
 
 %%%
 
+## Kotlin Type Hierarchy
+
+- Any
+  - Any? is the root of the hierarchy (a supertype of any other type)
+  - Any is a subtype of Any? and the root of the Non-Null types
+
+- Unit
+  - A type with only one value: the Unit object
+  - Corresponds to the void type in Java
+
+%%%
+
+## Kotlin Type Hierarchy
+
+- Nothing
+  - Nothing has no instances
+  - Represents *a value that never exists*
+  - Example: Functions that never return (always throw an exception)
+  - Bottom type: It is a subtype of any other type
+
+```kotlin
+public inline fun TODO(reason: String): Nothing =
+  throw NotImplementedError("An operation is not implemented: $reason")
+
+fun doSomething: A = TODO("This should do something!") // Valid implementation
+```
+
+%%%
+
+## Kotlin Type Hierarchy
+
+- Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy
+  - Good additional explanation of Kotlin Types
+  - Relation between Nullable and Non-Null Types
+
+  ![nullable-hierarchy](img/nullable-hierarchy.png)
+  - [http://natpryce.com/articles/000818.html](http://natpryce.com/articles/000818.html)
+
+%%%
+
 ## Variance
 
 - Definition: `A <: B` if `A` is a subtype of `B`
@@ -594,13 +636,13 @@ animals.add(dog1) // Problem - Adding a dog to a list of cats!
 
 - List in Kotlin is covariant - Why?
   - It is read-only so A never appears in a contravariant position
-  <!-- .element: class="fragment" data-fragment-index="1"-->
+  <!-- .element: class="fragment" data-fragment-index="1" -->
   - MutableList is invariant
-  <!-- .element: class="fragment" data-fragment-index="2"-->
+  <!-- .element: class="fragment" data-fragment-index="2" -->
   - You can control variance and the compiler enforces it
-  <!-- .element: class="fragment" data-fragment-index="3"-->
+  <!-- .element: class="fragment" data-fragment-index="3" -->
   - Use @UnsafeVariance annotation if you know something is safe despite it appears in an unsafe position
-  <!-- .element: class="fragment" data-fragment-index="3"-->
+  <!-- .element: class="fragment" data-fragment-index="3" -->
 
 %%%
 
@@ -610,11 +652,11 @@ animals.add(dog1) // Problem - Adding a dog to a list of cats!
 
 - What if we also want to abstract over the type constructor itself?
 
-- It is allowed on languages like Haskell or Scala (F[_])
+- It is allowed on languages like Haskell or Scala (F[\_])
 
 - Kotlin does not support this directly
 
-- **Katz\!** <!-- .element: class="fragment" data-fragment-index="1"-->
+- **Katz\!** <!-- .element: class="fragment" -->
 
 %%%
 
@@ -671,4 +713,6 @@ animals.add(dog1) // Problem - Adding a dog to a list of cats!
 Olmo Gallegos ([@voghDev](https://twitter.com/voghDev))
 
 Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg))
+
+[https://github.com/jrgonzalezg/kotlin-intro-talk](https://github.com/jrgonzalezg/kotlin-intro-talk)
 

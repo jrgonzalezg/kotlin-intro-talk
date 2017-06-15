@@ -570,17 +570,17 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 
 - Kotlin does not support this directly
 
-- **Katz\!** <!-- .element: class="fragment" -->
+- **kategory\!** <!-- .element: class="fragment" -->
 
 %%%
 
-### Katz: Functional Data Types and abstractions
+### kategory: Functional Data Types and abstractions for Kotlin
   - Custom encoding to allow defining HKTs and type classes
   - Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)
   - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
   - With Free monads!
     - Totally separate program definition from program interpretation
-  - [https://github.com/FineCinnamon/Katz](https://github.com/FineCinnamon/Katz)
+  - [https://github.com/kategory/kategory](https://github.com/kategory/kategory)
 
 ---
 

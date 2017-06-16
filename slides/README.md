@@ -11,7 +11,7 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
 ## Introduction
 
 - The Kotlin language
-  - Basics
+  - Basic features
   - Null-safety
   - Extension functions
   - Kotlin on Android
@@ -56,18 +56,17 @@ Note: Consider talking about anko and other concrete details on Android Dev
 
 ---
 
-## Features
+## Basic Features
 
 - Data classes
 - Inheritance (open, closed classes)
 - Interfaces with attrs, default methods
-- Generics with default template methods
 - Default values for attributes
 - Smart casts
 - with, apply, let functions
-- Coroutines! Since Kotlin 1.1
 - Multiple inheritance
 - Testability (JUnit4 100% supported)
+- Coroutines! Since Kotlin 1.1 (to be described later)
 
 ---
 
@@ -400,6 +399,120 @@ val textView: TextView = TextView(this).apply {
 ```
 
 textView can also be optional and this code will still work
+
+---
+
+## Multiple inheritance
+
+```kotlin
+interface Transportation {
+    fun move()
+    fun emitCO2()
+}
+```
+```kotlin
+interface PieceOfMuseum {
+    fun shine()
+    fun lookGreat()
+}
+
+```
+
+A car can be a mean of Transportation, and also a Piece of museum
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
+class Car : Transportation, PieceOfMuseum {
+    override fun move() {
+    }
+
+    override fun shine() {
+    }
+
+    override fun emitCO2() {
+    }
+
+    override fun lookGreat() {
+    }
+}
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+## Multiple inheritance by delegation
+
+Car class is built with two parameters, one is responsible for the "Transportation" tasks, and the other one for the "PieceOfMuseum"
+
+```kotlin
+class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) : Transportation by t, PieceOfMuseum by p {
+    fun letTheShowBegin() {
+        move()
+        shine()
+        emitCO2()
+        lookGreat()
+    }
+}
+
+```
+
+---
+
+## Testability
+
+- JUnit is 100% supported
+- Test names are very readable, near specification of real requirements
+
+```kotlin
+@Test
+fun `should request a List of users on start`() {
+    val presenter = UserListPresenter(mockContext, userRepository)
+
+    presenter.view = mockView
+    presenter.initialize()
+
+    verify(userRepository, times(1))?.getUsers()
+}
+```
+
+---
+
+## Testability: Mockito support
+
+- Similarly to Java, Mockito is supported
+- A Small issue related to final classes (easy to solve)
+- [mockito-kotlin](https://github.com/nhaarman/mockito-kotlin) adds some syntactic sugar
+
+```kotlin
+@Test
+fun `should show a list of users if previous request has results`() {
+    val presenter = UserListPresenter(mockContext, userRepository)
+    `when`(userRepository.getUsers()).thenReturn(listOf(User(name = "John")))
+
+    presenter.view = mockView
+    presenter.initialize()
+
+    verify(mockView, times(1))?.showUsers(anyList())
+}
+```
+
+```kotlin
+@Mock lateinit var userRepository: UserRepository
+
+@Mock lateinit var mockContext: Context
+
+@Mock lateinit var mockView: SomeDetailPresenter.MVPView
+
+@Before
+fun setUp() {
+    MockitoAnnotations.initMocks(this)
+}
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Test names can be made even more readable using third-party components like
+<!-- .element: class="fragment" data-fragment-index="2" -->
+[kotlintest](https://github.com/kotlintest/kotlintest)
 
 ---
 

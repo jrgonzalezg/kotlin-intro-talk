@@ -13,11 +13,9 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
 - The Kotlin language
   - Basic features
   - Null-safety
+  - Functional Programming (FP)
   - Extension functions
   - Kotlin on Android
-- Functional Programming (FP) basics
-  - Lambda expressions
-  - FP operators available in Kotlin?
 - Advanced topics
   - Advanced Types
   - Domain Specific Languages (DSLs)
@@ -325,6 +323,67 @@ if (novel is Novel) {
   novel.summary = "Once upon a time..."
 }
 ```
+
+---
+
+## Functional Programming (FP)
+
+%%%
+
+### Principles
+
+- A computation can be viewed as a **function** that maps inputs to outputs
+
+- **Pure** functions
+  - Always return the **same result** for the **same arguments**
+  - The evaluation of the result has **no observable side effects**
+  - A functions that takes no parameters must return a constant value
+  - Function **signature does not lie**
+    - You can infer what the function may do by its signature
+    - If the function has no parameters it should return a constant
+
+%%%
+
+## Principles
+
+- **Immutability** by default
+  - Data can not be changed after it is created
+  - State changes are represented by new instances of data
+  - Old instances are not affected
+  - Simplifies multi-threaded applications (**race conditions**)
+
+```kotlin
+data class Book(val id: Int, val title: String, val coverId: Int)
+
+val book = Book(id = 3, title = "Sherlock Holmes", coverId = 254) // Immutable
+val modifiedBook = book.copy(coverId = 2) // Copy is a separate immutable instance
+```
+
+- The value of `book` can not be changed
+- Creation of `modifiedBook` does not affect the value of book
+- `modifiedBook` is also immutable
+
+%%%
+
+## Collections
+
+- Kotlin distinguishes **mutable** and **immutable** collections
+  - You have control over when collections can be edited
+  - Helps to eliminate bugs and to design better APIs
+
+```kotlin
+val ids: List<Int> = listOf(1, 2, 3)
+println(ids.get(2)) // 3
+ids.add(0, 6) // Unresolved reference: add
+
+val numbers: MutableList<Int> = mutableListOf(5, 9, 3)
+numbers.add(0, 6)
+println(numbers) // [6, 5, 9, 3]
+```
+
+- Currently the *immutable* collections are really read only versions of mutable collections
+- [https://github.com/Kotlin/kotlinx.collections.immutable](https://github.com/Kotlin/kotlinx.collections.immutable)
+  - Prototypes of real immutable collections with the performance characteristics of typical FP **persistent data structures**
 
 ---
 
@@ -801,7 +860,7 @@ Completed in 1017 ms
   - Many tests (reword this)
   - Single God Package, Thermosiphon Samples
   - [https://github.com/voghDev/HelloKotlin](https://github.com/voghDev/HelloKotlin)
-- OpenLibraryApp
+- OpenLibraryApp (Incomplete WIP)
   - Sample Android App to query and display Open Library data
   - Dependency Injection (DI) with Dagger 2
   - Clean Architecture, Repository Pattern, MVP

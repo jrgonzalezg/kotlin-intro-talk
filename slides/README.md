@@ -422,7 +422,7 @@ println(numbers) // [6, 5, 9, 3]
 
 %%%
 
-### Functional combinators
+### Functional Combinators
 
 - John Hughes: *A combinator is a function which builds programs fragments from program fragments*
 
@@ -437,6 +437,26 @@ val result = strings.filter { it.length == 4 }
         .joinToString(separator = " ")
 
 println(result) // STAY HERE
+
+```
+
+%%%
+
+### Functional Combinators
+
+```kotlin
+val strings = listOf("Kotlin", "is", "here", "to", "stay")
+
+val result: Map<Char, Int> = strings
+        .filterNot { it.contains('t') } // Keep only strings without 't'
+        .flatMap { it.toList() } // A list of chars from the list of strings
+        .groupBy { it } // A map from each char to its occurrences
+        .mapValues { it.value.size } // A map from char to occurrence count
+        .toList() // List of pairs (char, count)
+        .sortedBy { it.second } // Sorted by increasing count
+
+println(result)
+// [(i, 1), (s, 1), (h, 1), (r, 1), (e, 2)]
 
 ```
 

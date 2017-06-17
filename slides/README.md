@@ -853,6 +853,9 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 
 ## Domain Specific Languages (DSLs)
 
+- Gradle Kotlin DSL: Kotlin language support for Gradle build scripts
+  - [https://github.com/gradle/kotlin-dsl](https://github.com/gradle/kotlin-dsl)
+
 - Life is Great and Everything Will Be Ok, Kotlin is Here (Google I/O '17 - [https://www.youtube.com/watch?v=fPzxfeDJDzY](https://www.youtube.com/watch?v=fPzxfeDJDzY))
 
 ```kotlin
@@ -935,7 +938,7 @@ Completed in 1017 ms
   - Documentation - Kotlin Programming Language
     - [https://kotlinlang.org/docs/](https://kotlinlang.org/docs/)
   - Kotlin and Android | Android Developers
-  - [https://developer.android.com/kotlin/index.html](https://developer.android.com/kotlin/index.html)
+    - [https://developer.android.com/kotlin/index.html](https://developer.android.com/kotlin/index.html)
   - Books
     - Kotlin for Android Developers - Antonio Leiva
       - [https://leanpub.com/kotlin-for-android-developers/](https://leanpub.com/kotlin-for-android-developers/)

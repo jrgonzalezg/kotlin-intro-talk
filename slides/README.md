@@ -192,9 +192,8 @@ data class Book(val id: Int, val title: String, val coverId: Int)
 We want to create a subclass called "Novel"
 
 ```kotlin
-class Novel : Book(id = 0, title = "", coverId = 0) {
-    var summary : String = ""
-}
+class Novel(id: Int = 0, title: String = "", coverId: Int = 0, var summary: String = "") :
+        Book(id, title, coverId)
 ```
 
 We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
@@ -311,9 +310,8 @@ Smart type casts
 ```kotlin
 open class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
 
-class Novel : Book(id = 0, title = "", coverId = 0) {
-  var summary: String = ""
-}
+class Novel(id: Int = 0, title: String = "", coverId: Int = 0, var summary: String = "") :
+        Book(id, title, coverId)
 
 val novel: Book = Novel()
 
@@ -664,6 +662,26 @@ animals.add(dog1) // Problem - Adding a dog to a list of cats!
   <!-- .element: class="fragment" data-fragment-index="3" -->
   - Use @UnsafeVariance annotation if you know something is safe despite it appears in an unsafe position
   <!-- .element: class="fragment" data-fragment-index="3" -->
+
+%%%
+
+### Variance
+
+```kotlin
+// File: kotlin.jvm.functions.Functions.kt
+
+/** A function that takes 1 argument. */
+public interface Function1<in P1, out R> : Function<R> {
+    /** Invokes the function with the specified argument. */
+    public operator fun invoke(p1: P1): R
+}
+
+// Int <: Number, Novel <: Book, so Function1<Int, Book> <: Function1<Number, Novel>
+val queryNovelFunc: Function1<Number, Novel> = { Novel() }
+val queryBookFunc: Function1<Int, Book> = queryNovelFunc
+val book: Book = queryBookFunc(1)
+val book2: Book = queryNovelFunc(7.0)
+```
 
 %%%
 

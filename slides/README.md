@@ -30,11 +30,17 @@ Note: Consider talking about anko and other concrete details on Android Dev
 
 - Expressive
 - Type-safe
+<!-- .element: class="fragment" -->
 - Functional (we’ll focus on that later)
+<!-- .element: class="fragment" -->
 - Created by JetBrains
+<!-- .element: class="fragment" -->
 - Official ! First class support in Android since Google I/O 2017
+<!-- .element: class="fragment" -->
 - Official support in Spring Framework 5.0 too (final version ~ July 2017))
+<!-- .element: class="fragment" -->
 - Made by and for Java “sufferers”
+<!-- .element: class="fragment" -->
 
 ---
 
@@ -42,15 +48,25 @@ Note: Consider talking about anko and other concrete details on Android Dev
 
 - Goal: Make it possible to use Kotlin for all parts of any project
 - Kotlin/JVM
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - All features and the whole standard library, production-ready
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - 100% Interoperable with Java and Android
+<!-- .element: class="fragment" data-fragment-index="1" -->
 - JavaScript
+<!-- .element: class="fragment" data-fragment-index="2" -->
   - All language features since Kotlin 1.1 and a large part of the standard library
+<!-- .element: class="fragment" data-fragment-index="2" -->
   - JavaScript interoperability (including Node.js and browser support)
+<!-- .element: class="fragment" data-fragment-index="2" -->
 - Kotlin / Native
+<!-- .element: class="fragment" data-fragment-index="3" -->
   - Machine code through LLVM
+<!-- .element: class="fragment" data-fragment-index="3" -->
   - Mac OS X 10.10 and later (x86-64), x86-64 Ubuntu Linux (14.04, 16.04 and later), Apple iOS (arm64), Raspberry Pi, cross-compiled on Linux host, more to come...
+<!-- .element: class="fragment" data-fragment-index="3" -->
   - Not yet feature complete
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 ---
 
@@ -108,10 +124,12 @@ public class Book {
 <!-- .element: style="font-size: 30%" -->
 
 - Kotlin
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
 data class Book(val id: Int, val title: String, val coverId: Int)
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ---
 
@@ -190,21 +208,27 @@ data class Book(val id: Int, val title: String, val coverId: Int)
 ```
 
 We want to create a subclass called "Novel"
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
-class Novel(id: Int = 0, title: String = "", coverId: Int = 0, var summary: String = "") :
-        Book(id, title, coverId)
+class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
+        var summary: String = "") : Book(id, title, coverId)
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ![inheritance1](img/inheritance1.png)
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 Book needs to be declared as open class for inheritance to work
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 ```kotlin
 open class Book(val id: Int, val title: String, val coverId: Int)
 ```
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 ---
 
@@ -238,8 +262,6 @@ interface Request<T> {
 
 Java: Default template methods are supported in abstract classes
 
-Kotlin: Just add a method body
-
 ```java
 public abstract class Request<T> {
   T client;
@@ -250,7 +272,7 @@ public abstract class Request<T> {
 }
 ```
 
-Kotlin
+Kotlin: Just add a method body
 
 ```kotlin
 interface Request<T> {
@@ -332,23 +354,35 @@ if (novel is Novel) {
 
 - A computation can be viewed as a **function** that maps inputs to outputs
 
-- **Pure** functions
-  - Always return the **same result** for the **same arguments**
-  - The evaluation of the result has **no observable side effects**
-  - A functions that takes no parameters must return a constant value
-  - Function **signature does not lie**
+- **Pure functions**
+  - <div>Always return the **same result** for the **same arguments**</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+  - <div>The evaluation of the result has **no observable side effects**</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+  - <div>A functions that takes no parameters must return a constant value</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
+  - <div>Function **signature does not lie**</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
     - You can infer what the function may do by its signature
+<!-- .element: class="fragment" data-fragment-index="4" -->
     - If the function has no parameters it should return a constant
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 %%%
 
-### Some Principles
+<!-- .slide: style="text-align: left;" -->
+
+### Some Principles <!-- .element: style="text-align: center;" -->
 
 - **Immutability** by default
-  - Data can not be changed after it is created
-  - State changes are represented by new instances of data
-  - Old instances are not affected
-  - Simplifies multi-threaded applications (**race conditions**)
+  - <div>Immutable data **can not be changed** after it is created</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+  - <div>**State changes** are represented by new instances of data</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+  - <div>**Original instances** are not affected</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
+  - <div>Simplifies multi-threaded applications (**race conditions**)</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ```kotlin
 data class Book(val id: Int, val title: String, val coverId: Int)
@@ -356,10 +390,14 @@ data class Book(val id: Int, val title: String, val coverId: Int)
 val book = Book(id = 3, title = "Sherlock Holmes", coverId = 254) // Immutable
 val modifiedBook = book.copy(coverId = 2) // Copy is a separate immutable instance
 ```
+<!-- .element: class="fragment" data-fragment-index="5" -->
 
-- The value of `book` can not be changed
-- Creation of `modifiedBook` does not affect the value of book
-- `modifiedBook` is also immutable
+- <div>The value of `book` can not be changed</div>
+<!-- .element: class="fragment" data-fragment-index="6" -->
+- <div>Creation of `modifiedBook` does not affect the value of book</div>
+<!-- .element: class="fragment" data-fragment-index="7" -->
+- <div>`modifiedBook` is also immutable</div>
+<!-- .element: class="fragment" data-fragment-index="8" -->
 
 %%%
 
@@ -367,13 +405,17 @@ val modifiedBook = book.copy(coverId = 2) // Copy is a separate immutable instan
 
 - Functions as a **first-class citizen** of the language
 
-- **Higher-order functions**
-  - Functions can **return functions**
-  - Functions can be **passed as arguments** to other functions
-  - Functions can be **assigned to variables** and stored inside other data structures
+- <div>**Higher-order functions**</div> <!-- .element: class="fragment" data-fragment-index="1" -->
+  - <div>Functions can **return functions**</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+  - <div>Functions can be **passed as arguments** to other functions</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
+  - <div>Functions can be **assigned to variables** and stored inside other data structures</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
-- Lambda Expressions
-  - Functions that are **not declared** but **passed immediately** as **an expression**
+- <div>Lambda Expressions</div> <!-- .element: class="fragment" data-fragment-index="5" -->
+  - <div>Functions that are **not declared** but **passed immediately** as **an expression**</div>
+<!-- .element: class="fragment" data-fragment-index="5" -->
 
 %%%
 
@@ -400,11 +442,15 @@ println(ints.map { it * 3 } ) // [3, 6, 9] - Implicit name for single parameter
 
 %%%
 
-### Collections
+<!-- .slide: style="text-align: left;" -->
+
+### Collections <!-- .element: style="text-align: center;" -->
 
 - Kotlin distinguishes **mutable** and **immutable** collections
-  - You have control over when collections can be edited
-  - Helps to eliminate bugs and to design better APIs
+  - <div>You have control over when collections can be edited</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+  - <div>Helps to eliminate bugs and to design better APIs</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```kotlin
 val ids: List<Int> = listOf(1, 2, 3)
@@ -415,18 +461,24 @@ val numbers: MutableList<Int> = mutableListOf(5, 9, 3)
 numbers.add(0, 6)
 println(numbers) // [6, 5, 9, 3]
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
-- Currently the *immutable* collections are really read only versions of mutable collections
-- [https://github.com/Kotlin/kotlinx.collections.immutable](https://github.com/Kotlin/kotlinx.collections.immutable)
-  - Prototypes of real immutable collections with the performance characteristics of typical FP **persistent data structures**
+- <div>Currently the *immutable* collections are really **read-only versions of mutable collections**</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
+- <div>[https://github.com/Kotlin/kotlinx.collections.immutable](https://github.com/Kotlin/kotlinx.collections.immutable)</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
+  - <div>Prototypes of real immutable collections with the performance characteristics of typical **FP persistent data structures**</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 %%%
 
 ### Functional Combinators
 
 - John Hughes: *A combinator is a function which builds programs fragments from program fragments*
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 - Functional Programming languages usually provide a big set of **combinators for collections**
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```kotlin
 val strings = listOf("Kotlin", "is", "here", "to", "stay")
@@ -437,8 +489,8 @@ val result = strings.filter { it.length == 4 }
         .joinToString(separator = " ")
 
 println(result) // STAY HERE
-
 ```
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 %%%
 
@@ -688,7 +740,7 @@ fun doSomething: A = TODO("This should do something!") // Valid implementation
 ### Type Hierarchy
 
 - Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy
-  - Good additional explanation of Kotlin Types
+  - Good general explanation of Kotlin Types
   - Relation between Nullable and Non-Null Types
 
   ![nullable-hierarchy](img/nullable-hierarchy.png)
@@ -762,26 +814,37 @@ val book2: Book = queryNovelFunc(7.0)
 
 %%%
 
-### Algebraic Data Types (ADTs) - Product Types
+<!-- .slide: style="text-align: left;" -->
+
+### Algebraic Data Types (ADTs) - Product Types <!-- .element: style="text-align: center;" -->
 
 - Seen in the wild as: Tuples, Records, POJOs…
 - Directly supported in most languages
+<!-- .element: class="fragment" data-fragment-index="1" -->
 - Kotlin: Ideally as a data class
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```kotlin
 data class Book(val id: Int, val title: String, val coverId: Int)
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 - Always contains an id, a title and a coverId
+<!-- .element: class="fragment" data-fragment-index="3" -->
 - There are as many possible inhabitants of the type as the product of the number of values in each of the composing subtypes
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 %%%
 
-### Algebraic Data Types (ADTs) - Sum Types
+<!-- .slide: style="text-align: left;" -->
+
+### Algebraic Data Types (ADTs) - Sum Types <!-- .element: style="text-align: center;" -->
 
 - Also named: Coproducts, Tagged Types, Disjoint Unions or Variant Types
 - No direct support on many languages
+<!-- .element: class="fragment" data-fragment-index="1" -->
 - Kotlin: Use sealed classes
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```kotlin
 sealed class BookResult {
@@ -790,13 +853,18 @@ sealed class BookResult {
     object BookUnavailable : BookResult()
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 - It can contain only one of the enclosed types and nothing else
+<!-- .element: class="fragment" data-fragment-index="3" -->
 - As many possible inhabitants as the sum of inhabitants on each subtype
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 %%%
 
-### Algebraic Data Types (ADTs) - Example
+<!-- .slide: style="text-align: left;" -->
+
+### Algebraic Data Types (ADTs) - Example <!-- .element: style="text-align: center;" -->
 
 - Based on [https://fsharpforfunandprofit.com/ddd/](https://fsharpforfunandprofit.com/ddd/)
 
@@ -818,36 +886,50 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
   }
 ```
 
-- Combines product and sum types to better model the domain
 - Ideal for domain-driven design
+<!-- .element: class="fragment" data-fragment-index="1" -->
 - A Contact requires a name and at least a primaryContactInfo
+<!-- .element: class="fragment" data-fragment-index="2" -->
 - It is not possible to create a contact with no primary contact info (or null)
+<!-- .element: class="fragment" data-fragment-index="3" -->
 - when branches are autocompleted, include smarcasts and the compiler ensures you handle all ContactInfo options => Less tests
+<!-- .element: class="fragment" data-fragment-index="4" -->
 - TODO() => Runtime Exception, add to static code analysis (detekt in Kotlin, checkstyle, findbugs)
+<!-- .element: class="fragment" data-fragment-index="5" -->
 
 %%%
 
 ### Higher-Kinded Types (HKTs)
 
 - Generics only allow to abstract over the enclosed type
+<!-- .element: class="fragment" -->
 
 - What if we also want to abstract over the type constructor itself?
+<!-- .element: class="fragment" -->
 
 - It is allowed on languages like Haskell or Scala (F[\_])
+<!-- .element: class="fragment" -->
 
 - Kotlin does not support this directly
+<!-- .element: class="fragment" -->
 
-- **kategory\!** <!-- .element: class="fragment" -->
+- **kategory\!**
+<!-- .element: class="fragment" -->
 
 %%%
 
-### kategory: Functional Data Types and abstractions for Kotlin
-  - Custom encoding to allow defining HKTs and type classes
-  - Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)
+### **kategory**: Functional Data Types and abstractions for Kotlin
   - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
-  - With Free monads!
-    - Totally separate program definition from program interpretation
-  - [https://github.com/kategory/kategory](https://github.com/kategory/kategory)
+  - <div>Custom encoding to allow defining HKTs and type classes</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+    - <div>Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+  - <div>With Free monads!</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+    - <div>Totally separate program definition from program interpretation</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+  - <div>[https://github.com/kategory/kategory](https://github.com/kategory/kategory)</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 ---
 
@@ -855,8 +937,10 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 
 - Gradle Kotlin DSL: Kotlin language support for Gradle build scripts
   - [https://github.com/gradle/kotlin-dsl](https://github.com/gradle/kotlin-dsl)
+  - Covers yet another part of a whole project
 
 - Life is Great and Everything Will Be Ok, Kotlin is Here (Google I/O '17 - [https://www.youtube.com/watch?v=fPzxfeDJDzY](https://www.youtube.com/watch?v=fPzxfeDJDzY))
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
 val db: SQLiteDatabase = // ...
@@ -875,21 +959,31 @@ inline fun SQLiteDatabase.transaction(body: SQLiteDatabase.() -> Unit) {
     }
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ---
 
 ## Coroutines
 
-- Computations that can be suspended without blocking a thread
-- Very lightweight: Millions of coroutines can run on a few threads
-- A suspended coroutines does not consume a thread
-- Allow to express an asynchronous computation on a sequential way
-- No need to use callbacks
-- Experimental feature on Kotlin 1.1 (API may still change)
-- Implemented through compiler transformations, no OS / VM support  needed
-- Language support: Suspending functions (suspend keyword)
-- Low level core API in the Kotlin Standard Library
-- High level APIs that can be used directly in the user code
+- **Computations that can be suspended** without blocking a thread
+- <div>Very **lightweight**: Millions of coroutines can run on a few threads</div>
+<!-- .element: class="fragment" -->
+- <div>A suspended coroutine **does not consume a thread**</div>
+<!-- .element: class="fragment" -->
+- <div>Allow to **express** an asynchronous computation **on a sequential way**</div>
+<!-- .element: class="fragment" -->
+- <div>**No** need to use **callbacks**</div>
+<!-- .element: class="fragment" -->
+- <div>Experimental feature on Kotlin 1.1 (API may still change)</div>
+<!-- .element: class="fragment" -->
+- <div>Implemented through compiler transformations, **no OS / VM support needed**</div>
+<!-- .element: class="fragment" -->
+- <div>Language support: Suspending functions (**suspend keyword**)</div>
+<!-- .element: class="fragment" -->
+- <div>Low level core API in the Kotlin Standard Library</div>
+<!-- .element: class="fragment" -->
+- <div>High level APIs that can be used directly in the user code</div>
+<!-- .element: class="fragment" -->
 
 ---
 
@@ -936,16 +1030,27 @@ Completed in 1017 ms
 
 - References
   - Documentation - Kotlin Programming Language
+<!-- .element: class="fragment" data-fragment-index="1" -->
     - [https://kotlinlang.org/docs/](https://kotlinlang.org/docs/)
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - Kotlin and Android | Android Developers
+<!-- .element: class="fragment" data-fragment-index="2" -->
     - [https://developer.android.com/kotlin/index.html](https://developer.android.com/kotlin/index.html)
+<!-- .element: class="fragment" data-fragment-index="2" -->
   - Books
+<!-- .element: class="fragment" data-fragment-index="3" -->
     - Kotlin for Android Developers - Antonio Leiva
+<!-- .element: class="fragment" data-fragment-index="3" -->
       - [https://leanpub.com/kotlin-for-android-developers/](https://leanpub.com/kotlin-for-android-developers/)
+<!-- .element: class="fragment" data-fragment-index="3" -->
     - Kotlin in Action - Dmitry Jemerov and Svetlana Isakova
+<!-- .element: class="fragment" data-fragment-index="3" -->
       - [https://www.manning.com/books/kotlin-in-action](https://www.manning.com/books/kotlin-in-action)
-  - Lambda World - October 26th & 27th, 2017: [http://www.lambda.world/](http://www.lambda.world/)
-    - Hadi Hariri - VP of Developer Advocacy, JetBrains - Kotlin talk
+<!-- .element: class="fragment" data-fragment-index="3" -->
+- <div>Lambda World - October 26th & 27th, 2017: [http://www.lambda.world/](http://www.lambda.world/)</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
+  - Hadi Hariri - VP of Developer Advocacy, JetBrains - Kotlin talk
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ---
 
@@ -959,12 +1064,19 @@ Completed in 1017 ms
   - Single God Package, Thermosiphon Samples
   - [https://github.com/voghDev/HelloKotlin](https://github.com/voghDev/HelloKotlin)
 - OpenLibraryApp (Incomplete WIP)
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - Sample Android App to query and display Open Library data
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - Dependency Injection (DI) with Dagger 2
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - Clean Architecture, Repository Pattern, MVP
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - Domain-driven design, Package by feature
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - Functional Programming (FP), Coroutines
+<!-- .element: class="fragment" data-fragment-index="1" -->
   - [https://github.com/jrgonzalezg/OpenLibraryApp](https://github.com/jrgonzalezg/OpenLibraryApp)
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ---
 

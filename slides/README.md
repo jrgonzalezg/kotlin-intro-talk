@@ -12,7 +12,6 @@ Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg)
 
 - The Kotlin language
   - Basic features
-  - Null-safety
   - Functional Programming (FP)
   - Extension functions
   - Kotlin on Android
@@ -73,6 +72,7 @@ Note: Consider talking about anko and other concrete details on Android Dev
 ## Basic Features
 
 - Data classes
+- Null-safety
 - Inheritance (open, closed classes)
 - Interfaces with attrs, default methods
 - Default values for attributes
@@ -214,21 +214,22 @@ We want to create a subclass called "Novel"
 class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
         var summary: String = "") : Book(id, title, coverId)
 ```
-<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 ![inheritance1](img/inheritance1.png)
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 Book needs to be declared as open class for inheritance to work
-<!-- .element: class="fragment" data-fragment-index="3" -->
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ```kotlin
 open class Book(val id: Int, val title: String, val coverId: Int)
 ```
-<!-- .element: class="fragment" data-fragment-index="3" -->
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ---
 
@@ -237,16 +238,19 @@ open class Book(val id: Int, val title: String, val coverId: Int)
 In Kotlin, interfaces can have attributes
 
 Java
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```java
 public interface Request<T> {
-  T client;
+  T client; // Does not compile
 
   void execute();
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 Kotlin
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```kotlin
 interface Request<T> {
@@ -255,6 +259,7 @@ interface Request<T> {
   fun execute()
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 
@@ -264,15 +269,17 @@ Java: Default template methods are supported in abstract classes
 
 ```java
 public abstract class Request<T> {
-  T client;
+  T client; // Compiles
 
   void execute() {
-    // Default implementation
+    // Default implementation for method
   }
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
-Kotlin: Just add a method body
+Kotlin
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```kotlin
 interface Request<T> {
@@ -283,6 +290,7 @@ interface Request<T> {
   }
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 
@@ -291,6 +299,7 @@ interface Request<T> {
 Java: Telescoping constructor problem - Builder pattern
 
 Kotlin: Attributes with default values to the rescue!
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
 data class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
@@ -308,6 +317,7 @@ fun initBooks() {
   }
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ---
 
@@ -318,16 +328,17 @@ Null safety
 ```kotlin
 val book : Book?
 
-book.title
+book.title // Does not compile
 
-book?.title
+book?.title // Ok
 
 if (book != null) {
-  book.title
+  book.title // Ok
 }
 ```
 
 Smart type casts
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
 open class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
@@ -335,6 +346,10 @@ open class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
 class Novel(id: Int = 0, title: String = "", coverId: Int = 0, var summary: String = "") :
         Book(id, title, coverId)
 
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
 val novel: Book = Novel()
 
 (novel as Novel).summary = "Once upon a time..."
@@ -343,6 +358,45 @@ if (novel is Novel) {
   novel.summary = "Once upon a time..."
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+## Elvis operator
+
+Java
+
+```Java
+String title;
+
+System.out.println(title != null ? title : "-");
+
+```
+```Java
+List<Novel> novels;
+
+System.out.println(
+    novels != null && novels.size() > 0 ? String.format("%d novels", novels.size()) : "No novels"
+);
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+Kotlin
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
+val title: String?
+
+print(title ?: "-")
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
+val novels : List<Novel>?
+
+print("${novels?.size ?: "No"} novels")
+```
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ---
 
@@ -628,7 +682,7 @@ class Car : Transportation, PieceOfMuseum {
 
 ## Multiple inheritance by delegation
 
-Car class is built with two parameters, one is responsible for the "Transportation" tasks, and the other one for the "PieceOfMuseum"
+Car class is built with two parameters, one is responsible for the "Transportation" behavior, and the other one for the "PieceOfMuseum"
 
 ```kotlin
 class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) : Transportation by t, PieceOfMuseum by p {
@@ -651,7 +705,7 @@ class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) : Transportation by t
 
 ```kotlin
 @Test
-fun `should request a List of users on start`() {
+fun 'should request a List of users on start'() {
     val presenter = UserListPresenter(mockContext, userRepository)
 
     presenter.view = mockView
@@ -671,7 +725,7 @@ fun `should request a List of users on start`() {
 
 ```kotlin
 @Test
-fun `should show a list of users if previous request has results`() {
+fun 'should show a list of users if previous request has results'() {
     val presenter = UserListPresenter(mockContext, userRepository)
     `when`(userRepository.getUsers()).thenReturn(listOf(User(name = "John")))
 

@@ -328,7 +328,7 @@ if (novel is Novel) {
 
 %%%
 
-### Principles
+### Some Principles
 
 - A computation can be viewed as a **function** that maps inputs to outputs
 
@@ -342,7 +342,7 @@ if (novel is Novel) {
 
 %%%
 
-## Principles
+### Some Principles
 
 - **Immutability** by default
   - Data can not be changed after it is created
@@ -363,7 +363,44 @@ val modifiedBook = book.copy(coverId = 2) // Copy is a separate immutable instan
 
 %%%
 
-## Collections
+### First-class Functions
+
+- Functions as a **first-class citizen** of the language
+
+- **Higher-order functions**
+  - Functions can **return functions**
+  - Functions can be **passed as arguments** to other functions
+  - Functions can be **assigned to variables** and stored inside other data structures
+
+- Lambda Expressions
+  - Functions that are **not declared** but **passed immediately** as **an expression**
+
+%%%
+
+### Lambda Expressions
+
+- Always **surrounded by curly braces**
+- map on List is a higher-order function
+- You can pass a lambda expression as the transform function
+
+```kotlin
+fun <T, R> List<T>.map(transform: (T) -> R): List<R> {
+    val result = arrayListOf<R>()
+    for (item in this)
+        result.add(transform(item))
+    return result
+}
+
+val ints = listOf(1, 2, 3)
+
+val doubled = ints.map { value -> value * 2 } // [2, 4, 6]
+
+println(ints.map { it * 3 } ) // [3, 6, 9] - Implicit name for single parameter
+```
+
+%%%
+
+### Collections
 
 - Kotlin distinguishes **mutable** and **immutable** collections
   - You have control over when collections can be edited
@@ -382,6 +419,26 @@ println(numbers) // [6, 5, 9, 3]
 - Currently the *immutable* collections are really read only versions of mutable collections
 - [https://github.com/Kotlin/kotlinx.collections.immutable](https://github.com/Kotlin/kotlinx.collections.immutable)
   - Prototypes of real immutable collections with the performance characteristics of typical FP **persistent data structures**
+
+%%%
+
+### Functional combinators
+
+- John Hughes: *A combinator is a function which builds programs fragments from program fragments*
+
+- Functional Programming languages usually provide a big set of **combinators for collections**
+
+```kotlin
+val strings = listOf("Kotlin", "is", "here", "to", "stay")
+
+val result = strings.filter { it.length == 4 }
+        .map(String::toUpperCase) // Method reference
+        .sortedByDescending { it } // Natural sort order
+        .joinToString(separator = " ")
+
+println(result) // STAY HERE
+
+```
 
 ---
 

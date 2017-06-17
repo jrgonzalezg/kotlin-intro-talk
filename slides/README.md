@@ -47,19 +47,19 @@ Note: Consider talking about anko and other concrete details on Android Dev
 ## Multiple targets
 
 - Goal: Make it possible to use Kotlin for all parts of any project
-- Kotlin/JVM
+- **Kotlin/JVM**
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - All features and the whole standard library, production-ready
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - 100% Interoperable with Java and Android
 <!-- .element: class="fragment" data-fragment-index="1" -->
-- JavaScript
+- **JavaScript**
 <!-- .element: class="fragment" data-fragment-index="2" -->
   - All language features since Kotlin 1.1 and a large part of the standard library
 <!-- .element: class="fragment" data-fragment-index="2" -->
   - JavaScript interoperability (including Node.js and browser support)
 <!-- .element: class="fragment" data-fragment-index="2" -->
-- Kotlin / Native
+- **Kotlin / Native**
 <!-- .element: class="fragment" data-fragment-index="3" -->
   - Machine code through LLVM
 <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -904,10 +904,10 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 - Generics only allow to abstract over the enclosed type
 <!-- .element: class="fragment" -->
 
-- What if we also want to abstract over the type constructor itself?
+- What if we also want to **abstract over the type constructor** itself?
 <!-- .element: class="fragment" -->
 
-- It is allowed on languages like Haskell or Scala (F[\_])
+- It is allowed on languages like Haskell or **Scala (F[\_])**
 <!-- .element: class="fragment" -->
 
 - Kotlin does not support this directly
@@ -920,13 +920,13 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 
 ### **kategory**: Functional Data Types and abstractions for Kotlin
   - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
-  - <div>Custom encoding to allow defining HKTs and type classes</div>
+  - <div>**Custom encoding** to allow defining **HKTs** and **type classes**</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
     - <div>Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
-  - <div>With Free monads!</div>
+  - <div>With **Free monads!**</div>
 <!-- .element: class="fragment" data-fragment-index="2" -->
-    - <div>Totally separate program definition from program interpretation</div>
+    - <div>Totally separate **program definition** from **program interpretation**</div>
 <!-- .element: class="fragment" data-fragment-index="2" -->
   - <div>[https://github.com/kategory/kategory](https://github.com/kategory/kategory)</div>
 <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -974,7 +974,7 @@ inline fun SQLiteDatabase.transaction(body: SQLiteDatabase.() -> Unit) {
 <!-- .element: class="fragment" -->
 - <div>**No** need to use **callbacks**</div>
 <!-- .element: class="fragment" -->
-- <div>Experimental feature on Kotlin 1.1 (API may still change)</div>
+- <div>**Experimental feature** on Kotlin 1.1 (API may still change)</div>
 <!-- .element: class="fragment" -->
 - <div>Implemented through compiler transformations, **no OS / VM support needed**</div>
 <!-- .element: class="fragment" -->
@@ -1005,7 +1005,9 @@ suspend fun doSomethingUsefulTwo(): Int {
 
 ---
 
-## Coroutines
+<!-- .slide: style="text-align: left;" -->
+
+## Coroutines <!-- .element: style="text-align: center;" -->
 
 ```kotlin
 fun main(args: Array<String>) = runBlocking<Unit> {
@@ -1088,5 +1090,5 @@ Olmo Gallegos ([@voghDev](https://twitter.com/voghDev))
 
 Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg))
 
-[https://github.com/jrgonzalezg/kotlin-intro-talk](https://github.com/jrgonzalezg/kotlin-intro-talk)
+[https://github.com/jrgonzalezg/kotlin-overview-talk](https://github.com/jrgonzalezg/kotlin-overview-talk)
 

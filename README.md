@@ -7,7 +7,7 @@ It has been created using [reveal.js](https://github.com/hakimel/reveal.js) with
 To run the presentation from a local web server at [http://localhost:8000/](http://localhost:8000/) do:
 
 ```bash
-git clone --recursive git@github.com:jrgonzalezg/kotlin-intro-talk.git
+git clone --recursive git@github.com:jrgonzalezg/kotlin-overview-talk.git
 cd slides
 npm install
 npm start
@@ -15,7 +15,7 @@ npm start
 
 # License
 
-    Copyright (C) 2017 The kotlin-intro-talk Authors
+    Copyright (C) 2017 The kotlin-overview-talk Authors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

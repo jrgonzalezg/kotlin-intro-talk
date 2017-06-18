@@ -182,6 +182,7 @@ One way to make this work would be using the ? operator
 val book: Book? = null
 print(book?.title)
 ```
+
 This code works, prints nothing. "title" is never evaluated because "book" is null. NPE is avoided
 
 ---
@@ -214,7 +215,6 @@ We want to create a subclass called "Novel"
 class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
         var summary: String = "") : Book(id, title, coverId)
 ```
-
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
 We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
@@ -343,8 +343,8 @@ Smart type casts
 ```kotlin
 open class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
 
-class Novel(id: Int = 0, title: String = "", coverId: Int = 0, var summary: String = "") :
-        Book(id, title, coverId)
+class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
+        var summary: String = "") : Book(id, title, coverId)
 
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -370,8 +370,8 @@ Java
 String title;
 
 System.out.println(title != null ? title : "-");
-
 ```
+
 ```Java
 List<Novel> novels;
 
@@ -578,6 +578,7 @@ textView.setText("Hello!");
 textView.setTextSize(16f);
 textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
 ```
+
 Kotlin
 
 ```kotlin
@@ -604,6 +605,7 @@ if (textView != null) {
     setContentView(linearLayout);
 }
 ```
+
 Kotlin
 
 ```kotlin
@@ -628,6 +630,7 @@ textView.setText("Hello!");
 textView.setTextSize(16f);
 textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
 ```
+
 Kotlin
 
 ```kotlin
@@ -650,6 +653,7 @@ interface Transportation {
     fun emitCO2()
 }
 ```
+
 ```kotlin
 interface PieceOfMuseum {
     fun shine()
@@ -685,7 +689,8 @@ class Car : Transportation, PieceOfMuseum {
 Car class is built with two parameters, one is responsible for the "Transportation" behavior, and the other one for the "PieceOfMuseum"
 
 ```kotlin
-class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) : Transportation by t, PieceOfMuseum by p {
+class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) :
+        Transportation by t, PieceOfMuseum by p {
     fun letTheShowBegin() {
         move()
         shine()
@@ -693,7 +698,6 @@ class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) : Transportation by t
         lookGreat()
     }
 }
-
 ```
 
 ---

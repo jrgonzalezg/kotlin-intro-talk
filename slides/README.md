@@ -769,22 +769,22 @@ Note: [Juanra speaks] This slide is just to let the crowd know that we are switc
 ### Type Hierarchy
 
 - Any
-  - Any? is the root of the hierarchy (a supertype of any other type)
-  - Any is a subtype of Any? and the root of the Non-Null types
+  - **Any?** is the **root** of the hierarchy (a **supertype** of any other type)
+  - **Any** is a **subtype of Any?** and the **root of the Non-Null types**
 
 - Unit
-  - A type with only one value: the Unit object
-  - Corresponds to the void type in Java
+  - A type with **only one value**: the Unit object
+  - Corresponds to the **void type in Java**
 
 %%%
 
 ### Type Hierarchy
 
 - Nothing
-  - Nothing has no instances
-  - Represents *a value that never exists*
-  - Example: Functions that never return (always throw an exception)
-  - Bottom type: It is a subtype of any other type
+  - Nothing has **no instances**
+  - Represents a value that **never exists**
+  - Example: Functions that **never return** (always throw an exception)
+  - Bottom type: It is a **subtype of any other type**
 
 ```kotlin
 public inline fun TODO(reason: String): Nothing =
@@ -799,7 +799,7 @@ fun doSomething: A = TODO("This should do something!") // Valid implementation
 
 - Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy
   - Good general explanation of Kotlin Types
-  - Relation between Nullable and Non-Null Types
+  - **Relation between Nullable and Non-Null Types**
 
   ![nullable-hierarchy](img/nullable-hierarchy.png)
   - [http://natpryce.com/articles/000818.html](http://natpryce.com/articles/000818.html)
@@ -808,18 +808,18 @@ fun doSomething: A = TODO("This should do something!") // Valid implementation
 
 ### Variance
 
-- Definition: `A <: B` if `A` is a subtype of `B`
+- Definition: **`A <: B`** if `A` is a **subtype of** `B`
 
 - What if we have generics (*type constructors*) like `List`?
 
-  - Covariant: `interface List<out A>`
-    - If `A <: B` then `List<A> <: List<B>`
+  - **Covariant**: `interface List<out A>`
+    - If **`A <: B`** then **`List<A> <: List<B>`**
 
-  - Contravariant: `interface List<in A>`
-    - If `A <: B` then `List<A> >: List<B>`
+  - **Contravariant**: `interface List<in A>`
+    - If **`A <: B`** then **`List<A> >: List<B>`**
 
-  - Invariant: `interface List<A>`
-    - Neither `List<A>` nor `List<B>` are a subtype of the other
+  - **Invariant**: `interface List<A>`
+    - **Neither** `List<A>` nor `List<B>` are **a subtype of the other**
 
 %%%
 
@@ -944,7 +944,7 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
   }
 ```
 
-- Ideal for domain-driven design
+- **Ideal for domain-driven design (DDD)**
 <!-- .element: class="fragment" data-fragment-index="1" -->
 - A Contact requires a name and at least a primaryContactInfo
 <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -993,7 +993,7 @@ fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
 
 ## Domain Specific Languages (DSLs)
 
-- Gradle Kotlin DSL: Kotlin language support for Gradle build scripts
+- Gradle Kotlin DSL: Kotlin language support for **Gradle build scripts**
   - [https://github.com/gradle/kotlin-dsl](https://github.com/gradle/kotlin-dsl)
   - Covers yet another part of a whole project
 

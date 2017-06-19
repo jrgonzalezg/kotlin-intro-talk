@@ -84,7 +84,6 @@ Note: Consider talking about anko and other concrete details on Android Dev
 - with, apply, let functions
 - Multiple inheritance
 - Testability (JUnit4 100% supported)
-- Coroutines! Since Kotlin 1.1 (to be described later)
 
 ---
 

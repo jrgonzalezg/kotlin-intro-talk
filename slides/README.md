@@ -80,6 +80,7 @@ Note: Consider talking about anko and other concrete details on Android Dev
 - Interfaces with attrs, default methods
 - Default values for attributes
 - Smart casts
+- Elvis operator
 - with, apply, let functions
 - Multiple inheritance
 - Testability (JUnit4 100% supported)
@@ -348,7 +349,6 @@ open class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
 
 class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
         var summary: String = "") : Book(id, title, coverId)
-
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
@@ -379,7 +379,9 @@ System.out.println(title != null ? title : "-");
 List<Novel> novels;
 
 System.out.println(
-    novels != null && novels.size() > 0 ? String.format("%d novels", novels.size()) : "No novels"
+    novels != null && novels.size() > 0 ?
+        String.format("%d novels", novels.size()) :
+        "No novels"
 );
 ```
 <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -1124,8 +1126,8 @@ Completed in 1017 ms
   - Some learning and feature testing with the Kotlin language
   - Model View Presenter (MVP)
   - Repository Pattern
-  - Many tests (reword this)
-  - Single God Package, Thermosiphon Samples
+  - Mockito, synchronous and asynchronous unit tests to cover all basic cases
+  - Package by layer
   - [https://github.com/voghDev/HelloKotlin](https://github.com/voghDev/HelloKotlin)
 - OpenLibraryApp (Incomplete WIP)
 <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -1146,7 +1148,7 @@ Completed in 1017 ms
 
 <!-- .slide: class="borderless big-th" style="text-align: left;" -->
 
-### Thanks! <!-- .element: style="text-align: center;" -->
+### Thanks for coming! <!-- .element: style="text-align: center;" -->
 
 <br/>
 

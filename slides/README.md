@@ -863,7 +863,7 @@ public interface Function1<in P1, out R> : Function<R> {
     public operator fun invoke(p1: P1): R
 }
 
-// Int <: Number, Novel <: Book, so Function1<Int, Book> <: Function1<Number, Novel>
+// Int <: Number, Novel <: Book, so Function1<Number, Novel> <: Function1<Int, Book>
 val queryNovelFunc: Function1<Number, Novel> = { Novel() }
 val queryBookFunc: Function1<Int, Book> = queryNovelFunc
 val book: Book = queryBookFunc(1)

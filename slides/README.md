@@ -524,7 +524,7 @@ println(numbers) // [6, 5, 9, 3]
 
 - <div>Currently the *immutable* collections are really **read-only versions of mutable collections**</div>
 <!-- .element: class="fragment" data-fragment-index="3" -->
-- <div>[https://github.com/Kotlin/kotlinx.collections.immutable](https://github.com/Kotlin/kotlinx.collections.immutable)</div>
+- <div>[Immutable Collections Library for Kotlin](https://github.com/Kotlin/kotlinx.collections.immutable)</div>
 <!-- .element: class="fragment" data-fragment-index="4" -->
   - <div>Prototypes of real immutable collections with the performance characteristics of typical **FP persistent data structures**</div>
 <!-- .element: class="fragment" data-fragment-index="4" -->
@@ -802,12 +802,11 @@ fun doSomething: A = TODO("This should do something!") // Valid implementation
 
 ### Type Hierarchy
 
-- Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy
+- [Nat Pryce - Mistaeks I Hav Made: A Whirlwind Tour of the Kotlin Type Hierarchy](http://natpryce.com/articles/000818.html)
   - Good general explanation of Kotlin Types
   - **Relation between Nullable and Non-Null Types**
 
   ![nullable-hierarchy](img/nullable-hierarchy.png)
-  - [http://natpryce.com/articles/000818.html](http://natpryce.com/articles/000818.html)
 
 %%%
 
@@ -929,7 +928,7 @@ sealed class BookResult {
 
 ### Algebraic Data Types (ADTs) - Example <!-- .element: style="text-align: center;" -->
 
-- Based on [https://fsharpforfunandprofit.com/ddd/](https://fsharpforfunandprofit.com/ddd/)
+- Based on [Domain Driven Design | F# for fun and profit](https://fsharpforfunandprofit.com/ddd/)
 
 ```kotlin
 typealias ContactName = String
@@ -983,10 +982,10 @@ abstract fun sendEmail(emailContactInfo: EmailContactInfo) // Somewhere
 %%%
 
 ### **kategory**: Functional Data Types and abstractions for Kotlin
-  - Based on Cats: [http://typelevel.org/cats/](http://typelevel.org/cats/)
+  - Based on [Cats](http://typelevel.org/cats/)
   - <div>**Custom encoding** to allow defining **HKTs** and **type classes**</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
-    - <div>Inspired by highj: [https://github.com/highj/highj](https://github.com/highj/highj)</div>
+    - <div>Inspired by [highj](https://github.com/highj/highj)</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - <div>With **Free monads!**</div>
 <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -999,11 +998,10 @@ abstract fun sendEmail(emailContactInfo: EmailContactInfo) // Somewhere
 
 ## Domain Specific Languages (DSLs)
 
-- Gradle Kotlin DSL: Kotlin language support for **Gradle build scripts**
-  - [https://github.com/gradle/kotlin-dsl](https://github.com/gradle/kotlin-dsl)
+- [Gradle Kotlin DSL](https://github.com/gradle/kotlin-dsl): Kotlin language support for **Gradle build scripts**
   - Covers yet another part of a whole project
 
-- Life is Great and Everything Will Be Ok, Kotlin is Here (Google I/O '17 - [https://www.youtube.com/watch?v=fPzxfeDJDzY](https://www.youtube.com/watch?v=fPzxfeDJDzY))
+- [Life is Great and Everything Will Be Ok, Kotlin is Here (Google I/O '17)](https://www.youtube.com/watch?v=fPzxfeDJDzY)
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
@@ -1051,9 +1049,11 @@ inline fun SQLiteDatabase.transaction(body: SQLiteDatabase.() -> Unit) {
 
 ---
 
-## Coroutines
+<!-- .slide: style="text-align: left;" -->
 
-[https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md)
+## Coroutines <!-- .element: style="text-align: center;" -->
+
+- [Guide to kotlinx.coroutines by example](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md)
 
 ```kotlin
 suspend fun doSomethingUsefulOne(): Int {
@@ -1095,25 +1095,17 @@ Completed in 1017 ms
 ## To know more
 
 - References
-  - Documentation - Kotlin Programming Language
+  - [Documentation - Kotlin Programming Language](https://kotlinlang.org/docs/)
 <!-- .element: class="fragment" data-fragment-index="1" -->
-    - [https://kotlinlang.org/docs/](https://kotlinlang.org/docs/)
-<!-- .element: class="fragment" data-fragment-index="1" -->
-  - Kotlin and Android | Android Developers
-<!-- .element: class="fragment" data-fragment-index="2" -->
-    - [https://developer.android.com/kotlin/index.html](https://developer.android.com/kotlin/index.html)
+  - [Kotlin and Android | Android Developers](https://developer.android.com/kotlin/index.html)
 <!-- .element: class="fragment" data-fragment-index="2" -->
   - Books
 <!-- .element: class="fragment" data-fragment-index="3" -->
-    - Kotlin for Android Developers - Antonio Leiva
+    - [Kotlin for Android Developers - Antonio Leiva](https://leanpub.com/kotlin-for-android-developers/)
 <!-- .element: class="fragment" data-fragment-index="3" -->
-      - [https://leanpub.com/kotlin-for-android-developers/](https://leanpub.com/kotlin-for-android-developers/)
+    - [Kotlin in Action - Dmitry Jemerov and Svetlana Isakova](https://www.manning.com/books/kotlin-in-action)
 <!-- .element: class="fragment" data-fragment-index="3" -->
-    - Kotlin in Action - Dmitry Jemerov and Svetlana Isakova
-<!-- .element: class="fragment" data-fragment-index="3" -->
-      - [https://www.manning.com/books/kotlin-in-action](https://www.manning.com/books/kotlin-in-action)
-<!-- .element: class="fragment" data-fragment-index="3" -->
-- <div>Lambda World - October 26th & 27th, 2017: [http://www.lambda.world/](http://www.lambda.world/)</div>
+- <div>[Lambda World - October 26th & 27th, 2017](http://www.lambda.world/)</div>
 <!-- .element: class="fragment" data-fragment-index="4" -->
   - Hadi Hariri - VP of Developer Advocacy, JetBrains - Kotlin talk
 <!-- .element: class="fragment" data-fragment-index="4" -->
@@ -1122,14 +1114,13 @@ Completed in 1017 ms
 
 ## To know more
 
-- HelloKotlin
+- [HelloKotlin](https://github.com/voghDev/HelloKotlin)
   - Some learning and feature testing with the Kotlin language
   - Model View Presenter (MVP)
   - Repository Pattern
   - Mockito, synchronous and asynchronous unit tests to cover all basic cases
   - Package by layer
-  - [https://github.com/voghDev/HelloKotlin](https://github.com/voghDev/HelloKotlin)
-- OpenLibraryApp (Incomplete WIP)
+- <div>[OpenLibraryApp](https://github.com/jrgonzalezg/OpenLibraryApp)(Incomplete WIP)</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - Sample Android App to query and display Open Library data
 <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -1140,8 +1131,6 @@ Completed in 1017 ms
   - Domain-driven design, Package by feature
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - Functional Programming (FP), Coroutines
-<!-- .element: class="fragment" data-fragment-index="1" -->
-  - [https://github.com/jrgonzalezg/OpenLibraryApp](https://github.com/jrgonzalezg/OpenLibraryApp)
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
 ---

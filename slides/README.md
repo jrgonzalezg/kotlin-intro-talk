@@ -928,20 +928,21 @@ sealed class BookResult {
 
 ```kotlin
 typealias ContactName = String
-data class Contact(val name: ContactName, val primaryContactInfo: ContactInfo, val secondaryContactInfo: ContactInfo? = null)
+data class Contact(val name: ContactName, val primaryContactInfo: ContactInfo,
+        val secondaryContactInfo: ContactInfo? = null)
 
 sealed class ContactInfo {
     class EmailContactInfo(val email: String): ContactInfo()
     class PostalContactInfo(val address: String): ContactInfo()
 }
 
-abstract fun sendEmail(emailContactInfo: EmailContactInfo) // Somewhere
-
 fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
   when (contact.primaryContactInfo) {
     is ContactInfo.EmailContactInfo -> sendEmail(contact.primaryContactInfo)
     is ContactInfo.PostalContactInfo -> TODO() // NotImplementedError
   }
+
+abstract fun sendEmail(emailContactInfo: EmailContactInfo) // Somewhere
 ```
 
 - **Ideal for domain-driven design (DDD)**

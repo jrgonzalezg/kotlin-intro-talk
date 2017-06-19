@@ -10,3 +10,12 @@
 .reveal b {
   color: #f17e00;
 }
+
+.reveal .big-th table th {
+  font-size: 120%;
+}
+
+.reveal .borderless table th,
+.reveal .borderless table td {
+  border-bottom: none;
+}

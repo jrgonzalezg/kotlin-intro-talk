@@ -1,10 +1,13 @@
-<!-- .slide: style="text-align: left;" -->
+<!-- .slide: class="borderless big-th" style="text-align: left;" -->
 
 ### Kotlin: A language for productive developers <!-- .element: style="text-align: center;" -->
 
-Olmo Gallegos ([@voghDev](https://twitter.com/voghDev))
+<br/>
 
-Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg))
+Olmo Gallegos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Juan Ramón González González
+:------------------------------------------------------------- | ----------------------------:
+*App&Web*                                                      | *Quadbits*
+[@voghDev](https://twitter.com/voghDev)                        | [@jrgonzalezg](https://twitter.com/jrgonzalezg)
 
 ---
 
@@ -1141,13 +1144,18 @@ Completed in 1017 ms
 
 ---
 
-<!-- .slide: style="text-align: left;" -->
+<!-- .slide: class="borderless big-th" style="text-align: left;" -->
 
 ### Thanks! <!-- .element: style="text-align: center;" -->
 
-Olmo Gallegos ([@voghDev](https://twitter.com/voghDev))
+<br/>
 
-Juan Ramón González González ([@jrgonzalezg](https://twitter.com/jrgonzalezg))
+Olmo Gallegos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Juan Ramón González González
+:------------------------------------------------------------- | ----------------------------:
+*App&Web*                                                      | *Quadbits*
+[@voghDev](https://twitter.com/voghDev)                        | [@jrgonzalezg](https://twitter.com/jrgonzalezg)
 
-[https://github.com/jrgonzalezg/kotlin-overview-talk](https://github.com/jrgonzalezg/kotlin-overview-talk)
+<br/>
 
+<div>[https://github.com/jrgonzalezg/kotlin-overview-talk](https://github.com/jrgonzalezg/kotlin-overview-talk)</div>
+<!-- .element: style="text-align: center;" -->

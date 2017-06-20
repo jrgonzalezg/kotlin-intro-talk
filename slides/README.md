@@ -15,8 +15,8 @@ Olmo Gallegos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Juan Ramón Gon
 
 - The Kotlin language
   - Basic features
-  - Functional Programming (FP)
   - Extension functions
+  - Functional Programming (FP)
   - Kotlin on Android
 - Advanced topics
   - Advanced Types
@@ -525,6 +525,58 @@ Test names can be made even more readable using third-party components like
 
 ---
 
+## Extension functions
+
+---
+
+### Extension functions
+
+- Ability to extend a class with new functionality without inheriting from it
+<!-- .element: class="fragment" data-fragment-index="1" -->
+- <div>No need to use patterns like **Decorator**</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+- Extension functions do not modify the receiver classes
+<!-- .element: class="fragment" data-fragment-index="1" -->
+- <div>Excellent substitute to **Helper** methods and **Util** classes</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+### Extension functions
+
+- Declared with class name as prefix, then function name
+
+```kotlin
+fun Activity.screenWidth(): Int {
+    val metrics: DisplayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    return metrics.widthPixels
+}
+
+fun Activity.screenHeight(): Int {
+    val metrics: DisplayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    return metrics.heightPixels
+}
+```
+
+---
+
+### Extension functions
+
+Then inside **Activity** class
+
+```kolin
+fun loadImage(url: String) {
+    Picasso.with(this)
+        .load(url)
+        .resize(screenWidth(), 200)
+        .into(imageView)
+}
+```
+
+---
+
 ## Functional Programming (FP)
 
 %%%
@@ -767,55 +819,6 @@ val textView: TextView = TextView(this).apply {
 ```
 
 textView can also be optional and this code will still work
-
----
-
-## Extension functions
-
-
-- Ability to extend a class with new functionality without inheriting from it
-<!-- .element: class="fragment" data-fragment-index="1" -->
-- <div>No need to use patterns like **Decorator**</div>
-<!-- .element: class="fragment" data-fragment-index="1" -->
-- Extension functions do not modify the receiver classes
-<!-- .element: class="fragment" data-fragment-index="1" -->
-- <div>Excellent substitute to **Helper** methods and **Util** classes</div>
-<!-- .element: class="fragment" data-fragment-index="2" -->
-
----
-
-## Extension functions
-
-- Declared with class name as prefix, then function name
-
-```kotlin
-fun Activity.screenWidth(): Int {
-    val metrics: DisplayMetrics = DisplayMetrics()
-    windowManager.defaultDisplay.getMetrics(metrics)
-    return metrics.widthPixels
-}
-
-fun Activity.screenHeight(): Int {
-    val metrics: DisplayMetrics = DisplayMetrics()
-    windowManager.defaultDisplay.getMetrics(metrics)
-    return metrics.heightPixels
-}
-```
-
----
-
-## Extension functions
-
-Then inside my Activity class
-
-```kolin
-fun loadImage(url: String) {
-    Picasso.with(this)
-        .load(url)
-        .resize(screenWidth(), 200)
-        .into(imageView)
-}
-```
 
 ---
 

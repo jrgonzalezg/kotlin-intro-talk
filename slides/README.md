@@ -81,9 +81,9 @@ Note: Consider talking about anko and other concrete details on Android Dev
 - Default values for attributes
 - Smart casts
 - Elvis operator
-- with, apply, let functions
 - Multiple inheritance
 - Testability (JUnit4 100% supported)
+- with, apply, let functions. Introduction to FP
 
 ---
 
@@ -404,6 +404,127 @@ print("${novels?.size ?: "No"} novels")
 
 ---
 
+## Multiple inheritance
+
+```kotlin
+interface Transportation {
+    fun move()
+    fun emitCO2()
+}
+```
+
+```kotlin
+interface PieceOfMuseum {
+    fun shine()
+    fun lookGreat()
+}
+
+```
+
+A car can be a mean of Transportation, and also a Piece of museum
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
+class Car : Transportation, PieceOfMuseum {
+    override fun move() {
+    }
+
+    override fun shine() {
+    }
+
+    override fun emitCO2() {
+    }
+
+    override fun lookGreat() {
+    }
+}
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+## Multiple inheritance by delegation
+
+Car class is built with two parameters, one is responsible for the "Transportation" behavior, and the other one for the "PieceOfMuseum"
+
+```kotlin
+class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) :
+        Transportation by t, PieceOfMuseum by p {
+    fun letTheShowBegin() {
+        move()
+        shine()
+        emitCO2()
+        lookGreat()
+    }
+}
+```
+
+---
+
+## Testability
+
+- JUnit is 100% supported
+- Test names are very readable, near specification of real requirements
+
+```kotlin
+@Test
+fun 'should request a List of users on start'() {
+    val presenter = UserListPresenter(mockContext, userRepository)
+
+    presenter.view = mockView
+    presenter.initialize()
+
+    verify(userRepository, times(1))?.getUsers()
+}
+```
+
+---
+
+## Testability: Mockito support
+
+- Similarly to Java, Mockito is supported
+- A Small issue related to final classes (easy to solve)
+- [mockito-kotlin](https://github.com/nhaarman/mockito-kotlin) adds some syntactic sugar
+
+```kotlin
+@Test
+fun 'should show a list of users if previous request has results'() {
+    val presenter = UserListPresenter(mockContext, userRepository)
+
+    `when`(userRepository.getUsers()).thenReturn(listOf(User(name = "John")))
+
+    presenter.view = mockView
+    presenter.initialize()
+
+    verify(mockView, times(1))?.showUsers(anyList())
+}
+```
+
+---
+
+## Testability: Mockito support
+
+- Typical Mockito annotations and **setUp** method - similar to Java
+
+```kotlin
+@Mock lateinit var userRepository: UserRepository
+
+@Mock lateinit var mockContext: Context
+
+@Mock lateinit var mockView: SomeDetailPresenter.MVPView
+
+@Before
+fun setUp() {
+    MockitoAnnotations.initMocks(this)
+}
+```
+
+Test names can be made even more readable using third-party components like
+<!-- .element: class="fragment" data-fragment-index="2" -->
+[kotlintest](https://github.com/kotlintest/kotlintest)
+
+---
+
 ## Functional Programming (FP)
 
 %%%
@@ -649,118 +770,48 @@ textView can also be optional and this code will still work
 
 ---
 
-## Multiple inheritance
+## Extension functions
 
-```kotlin
-interface Transportation {
-    fun move()
-    fun emitCO2()
-}
-```
 
-```kotlin
-interface PieceOfMuseum {
-    fun shine()
-    fun lookGreat()
-}
-
-```
-
-A car can be a mean of Transportation, and also a Piece of museum
-<!-- .element: class="fragment" data-fragment-index="1" -->
-
-```kotlin
-class Car : Transportation, PieceOfMuseum {
-    override fun move() {
-    }
-
-    override fun shine() {
-    }
-
-    override fun emitCO2() {
-    }
-
-    override fun lookGreat() {
-    }
-}
-```
-<!-- .element: class="fragment" data-fragment-index="2" -->
+- Ability to extend a class with new functionality without inheriting from it
+- No need to use patterns like **Decorator**
+- Extension functions do not modify the receiver classes
+- Excellent substitute to **Helper** methods and **Util** classes
 
 ---
 
-## Multiple inheritance by delegation
+## Extension functions
 
-Car class is built with two parameters, one is responsible for the "Transportation" behavior, and the other one for the "PieceOfMuseum"
+- Declared with class name as prefix, then function name
 
 ```kotlin
-class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) :
-        Transportation by t, PieceOfMuseum by p {
-    fun letTheShowBegin() {
-        move()
-        shine()
-        emitCO2()
-        lookGreat()
-    }
+fun Activity.screenWidth(): Int {
+    val metrics: DisplayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    return metrics.widthPixels
+}
+
+fun Activity.screenHeight(): Int {
+    val metrics: DisplayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    return metrics.heightPixels
 }
 ```
 
 ---
 
-## Testability
+## Extension functions
 
-- JUnit is 100% supported
-- Test names are very readable, near specification of real requirements
+Then inside my Activity class
 
-```kotlin
-@Test
-fun 'should request a List of users on start'() {
-    val presenter = UserListPresenter(mockContext, userRepository)
-
-    presenter.view = mockView
-    presenter.initialize()
-
-    verify(userRepository, times(1))?.getUsers()
+```kolin
+fun loadImage(url: String) {
+    Picasso.with(this)
+        .load(url)
+        .resize(screenWidth(), 200)
+        .into(imageView)
 }
 ```
-
----
-
-## Testability: Mockito support
-
-- Similarly to Java, Mockito is supported
-- A Small issue related to final classes (easy to solve)
-- [mockito-kotlin](https://github.com/nhaarman/mockito-kotlin) adds some syntactic sugar
-
-```kotlin
-@Test
-fun 'should show a list of users if previous request has results'() {
-    val presenter = UserListPresenter(mockContext, userRepository)
-    `when`(userRepository.getUsers()).thenReturn(listOf(User(name = "John")))
-
-    presenter.view = mockView
-    presenter.initialize()
-
-    verify(mockView, times(1))?.showUsers(anyList())
-}
-```
-
-```kotlin
-@Mock lateinit var userRepository: UserRepository
-
-@Mock lateinit var mockContext: Context
-
-@Mock lateinit var mockView: SomeDetailPresenter.MVPView
-
-@Before
-fun setUp() {
-    MockitoAnnotations.initMocks(this)
-}
-```
-<!-- .element: class="fragment" data-fragment-index="1" -->
-
-Test names can be made even more readable using third-party components like
-<!-- .element: class="fragment" data-fragment-index="2" -->
-[kotlintest](https://github.com/kotlintest/kotlintest)
 
 ---
 

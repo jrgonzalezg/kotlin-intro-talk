@@ -774,9 +774,13 @@ textView can also be optional and this code will still work
 
 
 - Ability to extend a class with new functionality without inheriting from it
-- No need to use patterns like **Decorator**
+<!-- .element: class="fragment" data-fragment-index="1" -->
+- <div>No need to use patterns like **Decorator**</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
 - Extension functions do not modify the receiver classes
-- Excellent substitute to **Helper** methods and **Util** classes
+<!-- .element: class="fragment" data-fragment-index="1" -->
+- <div>Excellent substitute to **Helper** methods and **Util** classes</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 
@@ -812,6 +816,60 @@ fun loadImage(url: String) {
         .into(imageView)
 }
 ```
+
+---
+
+## Kotlin on Android
+
+---
+
+### Kotlin on Android
+
+[anko](https://github.com/Kotlin/anko): Pleasant Android application development
+
+- Huge set of tools to clean and simplify your Android code
+- Anko Layouts: **View binding** similar to [ButterKnife's](https://github.com/JakeWharton/butterknife) **@BindView**
+- Pleasant **SQLite** management. No need to use an **ORM**
+- **async** and **doAsync** to manage asynchronous calls
+- Also supports Coroutines (described later)
+
+---
+
+## View binding example
+
+```xml
+<Button
+        android:id="@+id/btn_start"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:text="@string/start"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+```
+
+<div>This widget can be directly accessed using **anko**</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    btn_start.setOnClickListener {
+        // Manage button tap here
+    }
+}
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
+override fun hideStartButton() {
+    btn_start.visibility = INVISIBLE
+}
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<div>No need to **findViewById** or similar</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 

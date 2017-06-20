@@ -309,7 +309,7 @@ interface Request<T> {
 
 ## Default values for attributes
 
-Java: Telescoping constructor problem - Builder pattern
+Java: Telescoping constructor problem - **Builder** pattern
 <!-- .element: style="text-align: left;" -->
 
 Kotlin: Attributes with default values to the rescue!
@@ -345,14 +345,23 @@ val book : Book?
 book.title // Does not compile
 
 book?.title // Ok
+```
 
+Adding a null check does the smart cast
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```kotlin
 if (book != null) {
   book.title // Ok
 }
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+---
+
+## Smart casts
 
 Smart type casts
-<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```kotlin
 open class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
@@ -576,14 +585,19 @@ fun Activity.screenHeight(): Int {
 
 ### Extension functions
 
-Then inside **Activity** class
+Then the extension function can be used inside **Activity** class
 
 ```kotlin
-fun loadImage(url: String) {
-    Picasso.with(this)
-        .load(url)
-        .resize(screenWidth(), 200)
-        .into(imageView)
+class SomeActivity : AppCompatActivity() {
+
+    // ...
+
+    fun loadImage(url: String) {
+        Picasso.with(this)
+            .load(url)
+            .resize(screenWidth(), 200)
+            .into(imageView)
+    }
 }
 ```
 

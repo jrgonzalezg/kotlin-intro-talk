@@ -685,6 +685,83 @@ println(ints.map { it * 3 } ) // [3, 6, 9] - Implicit name for single parameter
 
 %%%
 
+## with, let, apply
+
+Java
+
+```java
+final TextView textView = new TextView(this);
+textView.setText("Hello!");
+textView.setTextSize(16f);
+textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+```
+
+Kotlin
+
+```kotlin
+val textView : TextView = TextView(this)
+with(textView) {
+    text = ""
+    textSize = 16f
+    setTextColor(color(android.R.color.white))
+}
+```
+
+Optional receiver can't be used in this case
+
+%%%
+
+## with, let, apply
+
+Java
+
+```java
+LinearLayout linearLayout = new LinearLayout(this);
+if (textView != null) {
+    linearLayout.addView(textView);
+    setContentView(linearLayout);
+}
+```
+
+Kotlin
+
+```kotlin
+val linearLayout = LinearLayout(this)
+textView?.let {
+    linearLayout.addView(it)
+    setContentView(linearLayout)
+}
+```
+
+let won't be applied if textView is null
+
+%%%
+
+## with, let, apply
+
+Java
+
+```java
+TextView textView = new TextView(this);
+textView.setText("Hello!");
+textView.setTextSize(16f);
+textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+```
+
+Kotlin
+
+```kotlin
+val textView: TextView = TextView(this).apply {
+    text = "Hello!"
+    textSize = 16f
+    setTextColor(color(android.R.color.white))
+}
+```
+
+textView can also be optional and this code will still work
+
+%%%
+
 <!-- .slide: style="text-align: left;" -->
 
 ### Collections <!-- .element: style="text-align: center;" -->
@@ -754,83 +831,6 @@ println(result)
 // [(i, 1), (s, 1), (h, 1), (r, 1), (e, 2)]
 
 ```
-
----
-
-## with, let, apply
-
-Java
-
-```java
-final TextView textView = new TextView(this);
-textView.setText("Hello!");
-textView.setTextSize(16f);
-textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-```
-
-Kotlin
-
-```kotlin
-val textView : TextView = TextView(this)
-with(textView) {
-    text = ""
-    textSize = 16f
-    setTextColor(color(android.R.color.white))
-}
-```
-
-Optional receiver can't be used in this case
-
----
-
-## with, let, apply
-
-Java
-
-```java
-LinearLayout linearLayout = new LinearLayout(this);
-if (textView != null) {
-    linearLayout.addView(textView);
-    setContentView(linearLayout);
-}
-```
-
-Kotlin
-
-```kotlin
-val linearLayout = LinearLayout(this)
-textView?.let {
-    linearLayout.addView(it)
-    setContentView(linearLayout)
-}
-```
-
-let won't be applied if textView is null
-
----
-
-## with, let, apply
-
-Java
-
-```java
-TextView textView = new TextView(this);
-textView.setText("Hello!");
-textView.setTextSize(16f);
-textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-```
-
-Kotlin
-
-```kotlin
-val textView: TextView = TextView(this).apply {
-    text = "Hello!"
-    textSize = 16f
-    setTextColor(color(android.R.color.white))
-}
-```
-
-textView can also be optional and this code will still work
 
 ---
 
@@ -1052,33 +1052,27 @@ sealed class BookResult {
 
 ```kotlin
 typealias ContactName = String
-data class Contact(val name: ContactName, val primaryContactInfo: ContactInfo,
-        val secondaryContactInfo: ContactInfo? = null)
 
 sealed class ContactInfo {
     class EmailContactInfo(val email: String): ContactInfo()
     class PostalContactInfo(val address: String): ContactInfo()
 }
 
+// A Contact can not be created without a name and at least one ContactInfo
+data class Contact(val name: ContactName, val primaryContactInfo: ContactInfo,
+        val secondaryContactInfo: ContactInfo? = null)
+
 fun sendMessageUsingPrimaryContactInfo(contact: Contact): Unit =
   when (contact.primaryContactInfo) {
+    // when branches are autocompleted, perform smarcasts and the
+    // compiler ensures you handle all ContactInfo options => Less tests
     is ContactInfo.EmailContactInfo -> sendEmail(contact.primaryContactInfo)
-    is ContactInfo.PostalContactInfo -> TODO() // NotImplementedError
+    is ContactInfo.PostalContactInfo -> TODO()
+    // TODO() should not be in production code - Use detekt, checkstyle, findbugs
   }
 
 abstract fun sendEmail(emailContactInfo: EmailContactInfo) // Somewhere
 ```
-
-- **Ideal for domain-driven design (DDD)**
-<!-- .element: class="fragment" data-fragment-index="1" -->
-- A Contact requires a name and at least a primaryContactInfo
-<!-- .element: class="fragment" data-fragment-index="2" -->
-- It is not possible to create a contact with no primary contact info (or null)
-<!-- .element: class="fragment" data-fragment-index="3" -->
-- when branches are autocompleted, include smarcasts and the compiler ensures you handle all ContactInfo options => Less tests
-<!-- .element: class="fragment" data-fragment-index="4" -->
-- TODO() => Runtime Exception, add to static code analysis (detekt in Kotlin, checkstyle, findbugs)
-<!-- .element: class="fragment" data-fragment-index="5" -->
 
 %%%
 

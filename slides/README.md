@@ -24,8 +24,6 @@ Olmo Gallegos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Juan Ramón Gon
   - Coroutines
 - To know more
 
-Note: Consider talking about anko and other concrete details on Android Dev
-
 ---
 
 ## The Kotlin programming language
@@ -83,7 +81,6 @@ Note: Consider talking about anko and other concrete details on Android Dev
 - Elvis operator
 - Multiple inheritance
 - Testability (JUnit4 100% supported)
-- with, apply, let functions. Introduction to FP
 
 ---
 
@@ -877,8 +874,6 @@ override fun hideStartButton() {
 ---
 
 ## Advanced Types
-
-Note: [Juanra speaks] This slide is just to let the crowd know that we are switching to a new section
 
 %%%
 

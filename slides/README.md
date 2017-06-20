@@ -136,6 +136,7 @@ data class Book(val id: Int, val title: String, val coverId: Int)
 ## Null-Safety
 
 Java (all non-primitive types are nullable in an unsafe way)
+<!-- .element: style="text-align: left;" -->
 
 ```java
 Book book = null;
@@ -143,12 +144,14 @@ book.getTitle();
 ```
 
 This code causes NPE!
+<!-- .element: style="text-align: left;" -->
 
 ---
 
 ## Null-Safety
 
 Kotlin - Trying to use null in Non-Null types
+<!-- .element: style="text-align: left;" -->
 
 ```kotlin
 val book: Book = null
@@ -156,8 +159,10 @@ print(book.title)
 ```
 
 This code does not compile - "null can not be a value of a non-null type Book"
+<!-- .element: style="text-align: left;" -->
 
-![null1](img/null1.png)
+<pre>![null1](img/null1.png)</pre>
+<!-- .element: style="text-align: left;" -->
 
 ---
 
@@ -169,10 +174,13 @@ print(book.title)
 ```
 
 This code does not compile - "only safe (?.) or non-null asserted (!!) calls are allowed on a nullable receiver of type Book"
+<!-- .element: style="text-align: left;" -->
 
-![null2](img/null2.png)
+<pre>![null2](img/null2.png)</pre>
+<!-- .element: style="text-align: left;" -->
 
 One way to make this work would be using the ? operator
+<!-- .element: style="text-align: left;" -->
 
 ---
 
@@ -183,13 +191,15 @@ val book: Book? = null
 print(book?.title)
 ```
 
-This code works, prints nothing. "title" is never evaluated because "book" is null. NPE is avoided
+This code works, but prints nothing. "title" is never evaluated because "book" is null. NPE is avoided.
+<!-- .element: style="text-align: left;" -->
 
 ---
 
 ## Null-Safety - Nullable types
 
 You can also assert non-null using the \!\! operator
+<!-- .element: style="text-align: left;" -->
 
 ```kotlin
 val book: Book? = null
@@ -197,19 +207,21 @@ print(book!!.title)
 ```
 
 This causes NPE, as we are forcing "book.title" to be evaluated, but "book" is null. Would behave similar to Java
+<!-- .element: style="text-align: left;" -->
 
 ---
 
 ## Inheritance
 
 Given the previous data class "Book"
+<!-- .element: style="text-align: left;" -->
 
 ```kotlin
 data class Book(val id: Int, val title: String, val coverId: Int)
 ```
 
 We want to create a subclass called "Novel"
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="fragment" data-fragment-index="1" style="text-align: left;" -->
 
 ```kotlin
 class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
@@ -218,13 +230,13 @@ class Novel(id: Int = 0, title: String = "", coverId: Int = 0,
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
 We find that we can't. Compiler yields "this type is final, so we can't inherit from it"
-<!-- .element: class="fragment" data-fragment-index="3" -->
+<!-- .element: class="fragment" data-fragment-index="3" style="text-align: left;" -->
 
-![inheritance1](img/inheritance1.png)
-<!-- .element: class="fragment" data-fragment-index="3" -->
+<pre>![inheritance1](img/inheritance1.png)</pre>
+<!-- .element: class="fragment" data-fragment-index="3" style="text-align: left;" -->
 
 Book needs to be declared as open class for inheritance to work
-<!-- .element: class="fragment" data-fragment-index="4" -->
+<!-- .element: class="fragment" data-fragment-index="4" style="text-align: left;" -->
 
 ```kotlin
 open class Book(val id: Int, val title: String, val coverId: Int)
@@ -266,6 +278,7 @@ interface Request<T> {
 ## Interfaces with attributes and default methods
 
 Java: Default template methods are supported in abstract classes
+<!-- .element: style="text-align: left;" -->
 
 ```java
 public abstract class Request<T> {
@@ -279,7 +292,7 @@ public abstract class Request<T> {
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
 Kotlin
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<!-- .element: class="fragment" data-fragment-index="2" style="text-align: left;" -->
 
 ```kotlin
 interface Request<T> {
@@ -297,9 +310,10 @@ interface Request<T> {
 ## Default values for attributes
 
 Java: Telescoping constructor problem - Builder pattern
+<!-- .element: style="text-align: left;" -->
 
 Kotlin: Attributes with default values to the rescue!
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="fragment" data-fragment-index="1" style="text-align: left;" -->
 
 ```kotlin
 data class Book(val id: Int = 0, val title: String = "", val coverId: Int = 0)
@@ -419,7 +433,7 @@ interface PieceOfMuseum {
 ```
 
 A car can be a mean of Transportation, and also a Piece of museum
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="fragment" data-fragment-index="1" style="text-align: left;" -->
 
 ```kotlin
 class Car : Transportation, PieceOfMuseum {
@@ -443,6 +457,7 @@ class Car : Transportation, PieceOfMuseum {
 ## Multiple inheritance by delegation
 
 Car class is built with two parameters, one is responsible for the "Transportation" behavior, and the other one for the "PieceOfMuseum"
+<!-- .element: style="text-align: left;" -->
 
 ```kotlin
 class LuxuryRacingCar(t: Transportation, p: PieceOfMuseum) :
@@ -516,9 +531,9 @@ fun setUp() {
 }
 ```
 
-Test names can be made even more readable using third-party components like
-<!-- .element: class="fragment" data-fragment-index="2" -->
-[kotlintest](https://github.com/kotlintest/kotlintest)
+<div>Test names can be made even more readable using third-party components like
+[kotlintest](https://github.com/kotlintest/kotlintest)</div>
+<!-- .element: class="fragment" -->
 
 ---
 
@@ -528,14 +543,14 @@ Test names can be made even more readable using third-party components like
 
 ### Extension functions
 
-- Ability to extend a class with new functionality without inheriting from it
+- <div>Ability to extend a class with new functionality without inheriting from it</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
 - <div>No need to use patterns like **Decorator**</div>
-<!-- .element: class="fragment" data-fragment-index="1" -->
-- Extension functions do not modify the receiver classes
-<!-- .element: class="fragment" data-fragment-index="1" -->
-- <div>Excellent substitute to **Helper** methods and **Util** classes</div>
 <!-- .element: class="fragment" data-fragment-index="2" -->
+- <div>Extension functions do not modify the receiver classes</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
+- <div>Excellent substitute to **Helper** methods and **Util** classes</div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ---
 
@@ -563,7 +578,7 @@ fun Activity.screenHeight(): Int {
 
 Then inside **Activity** class
 
-```kolin
+```kotlin
 fun loadImage(url: String) {
     Picasso.with(this)
         .load(url)
@@ -825,13 +840,12 @@ textView can also be optional and this code will still work
 
 ### Kotlin on Android
 
-[anko](https://github.com/Kotlin/anko): Pleasant Android application development
-
-- Huge set of tools to clean and simplify your Android code
-- Anko Layouts: **View binding** similar to [ButterKnife's](https://github.com/JakeWharton/butterknife) **@BindView**
-- Pleasant **SQLite** management. No need to use an **ORM**
-- **async** and **doAsync** to manage asynchronous calls
-- Also supports Coroutines (described later)
+- [anko](https://github.com/Kotlin/anko): Pleasant Android application development
+  - Huge set of tools to clean and simplify your Android code
+  - Anko Layouts: **View binding** similar to [ButterKnife's](https://github.com/JakeWharton/butterknife) **@BindView**
+  - Pleasant **SQLite** management. No need to use an **ORM**
+  - **async** and **doAsync** to manage asynchronous calls
+  - Also supports Coroutines (described later)
 
 ---
 
@@ -848,7 +862,7 @@ textView can also be optional and this code will still work
 ```
 
 <div>This widget can be directly accessed using **anko**</div>
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="fragment" data-fragment-index="1" style="text-align: left;" -->
 
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
@@ -868,8 +882,8 @@ override fun hideStartButton() {
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
-<div>No need to **findViewById** or similar</div>
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<div>No need to use **findViewById** or similar</div>
+<!-- .element: class="fragment" data-fragment-index="2" style="text-align: left;" -->
 
 ---
 

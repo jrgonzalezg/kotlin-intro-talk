@@ -703,11 +703,15 @@ val textView : TextView = TextView(this)
 with(textView) {
     text = ""
     textSize = 16f
-    setTextColor(color(android.R.color.white))
+    setTextColor(getColor(android.R.color.white))
 }
 ```
 
-Optional receiver can't be used in this case
+```kotlin
+// with is a higher-order function returning R
+// block is a lambda with receiver (an extension lambda) returning R
+public inline fun <T, R> with(receiver: T, block: T.() -> R): R = receiver.block()
+```
 
 %%%
 
@@ -733,7 +737,11 @@ textView?.let {
 }
 ```
 
-let won't be applied if textView is null
+```kotlin
+// let is a higher-order extension function returning R
+// block is a function from (T) to R
+public inline fun <T, R> T.let(block: (T) -> R): R = block(this)
+```
 
 %%%
 
@@ -754,11 +762,16 @@ Kotlin
 val textView: TextView = TextView(this).apply {
     text = "Hello!"
     textSize = 16f
-    setTextColor(color(android.R.color.white))
+    setTextColor(getColor(android.R.color.white))
 }
 ```
 
-textView can also be optional and this code will still work
+```kotlin
+// apply is a higher-order extension function returning Unit
+// block is a lambda with receiver (an extension lambda) returning Unit
+public inline fun <T> T.apply(block: T.() -> Unit): T { block(); return this }
+
+```
 
 %%%
 

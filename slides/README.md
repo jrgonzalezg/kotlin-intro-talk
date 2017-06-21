@@ -1252,7 +1252,7 @@ Completed in 1017 ms
   - Repository Pattern
   - Mockito, synchronous and asynchronous unit tests to cover all basic cases
   - Package by layer
-- <div>[OpenLibraryApp](https://github.com/jrgonzalezg/OpenLibraryApp)(Incomplete WIP)</div>
+- <div>[OpenLibraryApp](https://github.com/jrgonzalezg/OpenLibraryApp) (Incomplete WIP)</div>
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - Sample Android App to query and display Open Library data
 <!-- .element: class="fragment" data-fragment-index="1" -->

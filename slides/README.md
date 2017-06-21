@@ -6,7 +6,7 @@
 
 Olmo Gallegos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Juan Ramón González González
 :------------------------------------------------------------- | ----------------------------:
-*App&Web*                                                      | *Quadbits*
+*App&Web*                                                      | *GoMore / Amovens (formerly Quadbits)*
 [@voghDev](https://twitter.com/voghDev)                        | [@jrgonzalezg](https://twitter.com/jrgonzalezg)
 
 ---
@@ -1284,7 +1284,7 @@ Completed in 1017 ms
 
 Olmo Gallegos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Juan Ramón González González
 :------------------------------------------------------------- | ----------------------------:
-*App&Web*                                                      | *Quadbits*
+*App&Web*                                                      | *GoMore / Amovens (formerly Quadbits)*
 [@voghDev](https://twitter.com/voghDev)                        | [@jrgonzalezg](https://twitter.com/jrgonzalezg)
 
 <br/>

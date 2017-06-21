@@ -1,8 +1,8 @@
 # Kotlin: A language for productive developers
 
-This presentation shows how the features in the Kotlin language can be used to make you a more productive developer.
+This talk shows how the features in the Kotlin language can be used to make you a more productive developer.
 
-It has been created using [reveal.js](https://github.com/hakimel/reveal.js) with [Markdown content](slides/README.md).
+It has been created using [reveal.js](https://github.com/hakimel/reveal.js) with [Markdown content](slides/README.md). There is also a version of the [deck on Speaker Deck](https://speakerdeck.com/jrgonzalez/kotlin-a-language-for-productive-developers).
 
 To run the presentation from a local web server at [http://localhost:8000/](http://localhost:8000/) do:
 
@@ -12,6 +12,12 @@ cd slides
 npm install
 npm start
 ```
+
+# Events
+
+The talk has been presented at the following events:
+
+- [Betabeers Granada event in June 2017](https://betabeers.com/event/xxi-betabeers-granada-kotlin-5530/)
 
 # License
 

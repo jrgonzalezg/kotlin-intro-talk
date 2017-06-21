@@ -616,14 +616,12 @@ class SomeActivity : AppCompatActivity() {
 <!-- .element: class="fragment" data-fragment-index="1" -->
   - <div>The evaluation of the result has **no observable side effects**</div>
 <!-- .element: class="fragment" data-fragment-index="2" -->
-  - <div>A functions that takes no parameters must return a constant value</div>
-<!-- .element: class="fragment" data-fragment-index="3" -->
   - <div>Function **signature does not lie**</div>
-<!-- .element: class="fragment" data-fragment-index="4" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
     - You can infer what the function may do by its signature
-<!-- .element: class="fragment" data-fragment-index="4" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
     - If the function has no parameters it should return a constant
-<!-- .element: class="fragment" data-fragment-index="4" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 %%%
 
@@ -648,13 +646,6 @@ val book = Book(id = 3, title = "Sherlock Holmes", coverId = 254) // Immutable
 val modifiedBook = book.copy(coverId = 2) // Copy is a separate immutable instance
 ```
 <!-- .element: class="fragment" data-fragment-index="5" -->
-
-- <div>The value of `book` can not be changed</div>
-<!-- .element: class="fragment" data-fragment-index="6" -->
-- <div>Creation of `modifiedBook` does not affect the value of book</div>
-<!-- .element: class="fragment" data-fragment-index="7" -->
-- <div>`modifiedBook` is also immutable</div>
-<!-- .element: class="fragment" data-fragment-index="8" -->
 
 %%%
 
